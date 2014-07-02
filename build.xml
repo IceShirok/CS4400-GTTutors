@@ -1,0 +1,47 @@
+<project name="GTTutors" default="compile" basedir=".">
+
+<property environment="env"/>
+<property name="app.name"      value="GTTutors"/>
+<property name="src"           value="${basedir}/src"/>
+<property name="web"           value="${basedir}/WebContent"/>
+<property name="lib"           value="${web}/WEB-INF/lib"/>
+<property name="production"    value="${basedir}/production"/>
+<property name="catalina.home" value="${env.CATALINA_HOME}"/>
+<property name="tomcat.webapp" value="${catalina.home}/webapps/${app.name}"/>
+
+<path id="compile.classpath">
+    <fileset dir="${catalina.home}/bin">
+        <include name="*.jar"/>
+    </fileset>
+    <pathelement location="${catalina.home}/lib"/>
+    <fileset dir="${catalina.home}/lib">
+        <include name="*.jar"/>
+    </fileset>
+    <fileset dir="${lib}">
+        <include name="**/*.jar"/>
+    </fileset>
+    <pathelement path="${production}/WEB-INF/classes" />
+</path>
+
+<target name="clean">
+    <delete dir="${production}"/>
+    <delete dir="${tomcat.webapp}"/>
+</target>
+
+<target name="compile">
+    <mkdir dir="${production}/WEB-INF/classes"/>
+    <javac srcdir="${src}" destdir="${production}/WEB-INF/classes" includeantruntime="false">
+        <classpath refid="compile.classpath"/>
+    </javac>
+</target>
+
+<target name="prepare" depends="compile">
+    <copy todir="${production}">
+        <fileset dir="WebContent"/>
+    </copy>
+    <copy todir="${tomcat.webapp}">
+        <fileset dir="${production}"/>
+    </copy>  
+</target>
+
+</project>

@@ -11,7 +11,9 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10.0" styleClass="root" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="src.code.controller.MenuController">
+<GridPane alignment="CENTER" hgap="10.0" styleClass="root" vgap="10.0"
+      xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2"
+      fx:controller="src.code.controller.MenuController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -36,15 +38,36 @@
   </stylesheets>
   <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
     <children>
-      <Button onAction="#logout" mnemonicParsing="false" text="Logout" />
+      <Button mnemonicParsing="false" onAction="#goBack" text="Logout">
+        <HBox.margin>
+          <Insets left="5.0" right="5.0" fx:id="x1" />
+        </HBox.margin>
+      </Button>
     </children>
   </HBox>
-  <Button mnemonicParsing="false" text="Add Budget Items" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-  <Button mnemonicParsing="false" text="Enter a Transaction" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-  <Button mnemonicParsing="false" text="Indicate a Paid Reimbursement" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-  <Button mnemonicParsing="false" text="View Budget Summaries" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-  <Button onAction="#viewSga" text="View SGA Allocations" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-  <Button mnemonicParsing="false" text="Report Bug to Sysadmin" GridPane.columnIndex="1" GridPane.rowIndex="8" />
   <Text fx:id="loginInfo" text="Logged in as:" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-  <Label prefWidth="450.0" text="Welcome to the YJFC Budget Tool, made by Susanna Dong. This tool is designed to make keeping track of monetary transactions easier! See the menu for more options." wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+  <HBox alignment="CENTER" prefHeight="29.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+    <children>
+      <Button onAction="#submit" fx:id="search" mnemonicParsing="false" text="Search for Tutors" HBox.margin="$x1" />
+      <Button onAction="#submit" fx:id="schedule" mnemonicParsing="false" text="Schedule a Tutor" HBox.margin="$x1" />
+      <Button onAction="#submit" fx:id="rate" text="Rate a Tutor" HBox.margin="$x1" />
+    </children>
+  </HBox>
+  <HBox alignment="CENTER" prefHeight="29.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+    <children>
+      <Button onAction="#submit" fx:id="apply" mnemonicParsing="false" text="Apply" HBox.margin="$x1" />
+      <Button onAction="#submit" fx:id="find" mnemonicParsing="false" text="Look Up Schedule" HBox.margin="$x1" />
+    </children>
+  </HBox>
+  <HBox alignment="CENTER" prefHeight="29.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+    <children>
+      <Button onAction="#submit" fx:id="recommend" mnemonicParsing="false" text="Recommend a Tutor" HBox.margin="$x1" />
+    </children>
+  </HBox>
+  <HBox alignment="CENTER" prefHeight="29.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+    <children>
+      <Button onAction="#submit" fx:id="sum1" mnemonicParsing="false" text="View Summary 1" HBox.margin="$x1" />
+      <Button onAction="#submit" fx:id="sum2" mnemonicParsing="false" text="View Summary 2" HBox.margin="$x1" />
+    </children>
+  </HBox>
 </GridPane>
