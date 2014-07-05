@@ -45,6 +45,8 @@ public class LoginController extends AbstractController {
     public final static String INVALID_TAG = "INVALID";
 
     public static String validateLogin(String username, String password) {
+        // TODO: hook DB up to correct connection
+        // then test to make sure everything works
         Connection connect = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -66,7 +68,6 @@ public class LoginController extends AbstractController {
 
     @Override
     protected void populate(ActionEvent event) {
-        // TODO Auto-generated method stub
-        
+        // not needed
     }
 }
