@@ -37,23 +37,23 @@
   </HBox>
   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
     <children>
-      <TableView prefHeight="150.0" prefWidth="511.0">
+      <TableView fx:id="findTable" prefHeight="150.0" prefWidth="511.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Day" />
-          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="70.0" text="Time" />
-          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="65.0" text="Name" />
-          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="109.0" text="Email" />
-          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="79.0" text="Course" />
+          <TableColumn fx:id="day" prefWidth="75.0" text="Day" />
+          <TableColumn fx:id="time" maxWidth="5000.0" minWidth="10.0" prefWidth="70.0" text="Time" />
+          <TableColumn fx:id="name" maxWidth="5000.0" minWidth="10.0" prefWidth="65.0" text="Name" />
+          <TableColumn fx:id="email" maxWidth="5000.0" minWidth="10.0" prefWidth="109.0" text="Email" />
+          <TableColumn fx:id="course" maxWidth="5000.0" minWidth="10.0" prefWidth="79.0" text="Course" />
         </columns>
       </TableView>
     </children>
   </HBox>
   <Button mnemonicParsing="false" onAction="#submit" text="OK" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-  <Label text="Find Tutor Schedule" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+  <Label fx:id="title" text="Find Tutor Schedule" GridPane.columnIndex="0" GridPane.rowIndex="1" />
   <HBox prefHeight="100.0" prefWidth="500.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
     <children>
       <Label text="Enter Tutor GTID:" />
-      <TextField prefWidth="200.0" />
+      <TextField fx:id="gtid" prefWidth="200.0" />
     </children>
   </HBox>
 </GridPane>
