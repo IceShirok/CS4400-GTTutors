@@ -23,18 +23,13 @@ public class MenuController extends AbstractController {
 
     @Override
     protected void goBack(ActionEvent event) {
-        try {
-            LoginStore.logOut();
-            transition(event, "login");
-        } catch (Exception e) {
-            System.out.println("Something went wrong with loading the scene...: " + e);
-        }
+        LoginStore.logOut();
+        transition(event, "login");
     }
     
     @Override
     protected void populate(ActionEvent event) {
-        // TODO Auto-generated method stub
-        
+        // not needed
     }
 
 }
