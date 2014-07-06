@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 
 public abstract class AbstractController {
     
+    public final static String SCREEN_URL = "../../../res/screens/";
+    public final static String FXML_EXT = ".fxml";
+    
     @FXML
     protected abstract void submit(ActionEvent event);
     
@@ -20,9 +23,7 @@ public abstract class AbstractController {
     @FXML
     protected void transition(ActionEvent event, String filename) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
-                    GTTutorsLaunch.SCREEN_URL
-                    +filename+GTTutorsLaunch.FXML_EXT));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(SCREEN_URL+filename+FXML_EXT));
             Parent root = (Parent) fxmlLoader.load();
 
             AbstractController controller = fxmlLoader.getController();

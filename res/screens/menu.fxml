@@ -11,9 +11,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10.0" styleClass="root" vgap="10.0"
-      xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2"
-      fx:controller="src.code.controller.MenuController">
+<GridPane alignment="CENTER" hgap="10.0" styleClass="root" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="src.code.controller.MenuController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -38,36 +36,32 @@
   </stylesheets>
   <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
     <children>
-      <Button mnemonicParsing="false" onAction="#goBack" text="Logout">
-        <HBox.margin>
-          <Insets left="5.0" right="5.0" fx:id="x1" />
-        </HBox.margin>
-      </Button>
+      <Button mnemonicParsing="false" onAction="#goBack" text="Logout" />
     </children>
   </HBox>
   <Text fx:id="loginInfo" text="Logged in as:" GridPane.columnIndex="1" GridPane.rowIndex="0" />
   <HBox alignment="CENTER" prefHeight="29.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
     <children>
-      <Button onAction="#submit" fx:id="search" mnemonicParsing="false" text="Search for Tutors" HBox.margin="$x1" />
-      <Button onAction="#submit" fx:id="schedule" mnemonicParsing="false" text="Schedule a Tutor" HBox.margin="$x1" />
-      <Button onAction="#submit" fx:id="rate" text="Rate a Tutor" HBox.margin="$x1" />
+      <Button fx:id="search" mnemonicParsing="false" onAction="#submit" text="Search for Tutors" />
+      <Button fx:id="schedule" mnemonicParsing="false" onAction="#submit" text="Schedule a Tutor" />
+      <Button fx:id="rate" onAction="#submit" text="Rate a Tutor" />
     </children>
   </HBox>
   <HBox alignment="CENTER" prefHeight="29.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
     <children>
-      <Button onAction="#submit" fx:id="apply" mnemonicParsing="false" text="Apply" HBox.margin="$x1" />
-      <Button onAction="#submit" fx:id="find" mnemonicParsing="false" text="Look Up Schedule" HBox.margin="$x1" />
+      <Button fx:id="apply" mnemonicParsing="false" onAction="#submit" text="Apply" />
+      <Button fx:id="find" mnemonicParsing="false" onAction="#submit" text="Look Up Schedule" />
     </children>
   </HBox>
   <HBox alignment="CENTER" prefHeight="29.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
     <children>
-      <Button onAction="#submit" fx:id="recommend" mnemonicParsing="false" text="Recommend a Tutor" HBox.margin="$x1" />
+      <Button fx:id="recommend" mnemonicParsing="false" onAction="#submit" text="Recommend a Tutor" />
     </children>
   </HBox>
   <HBox alignment="CENTER" prefHeight="29.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
     <children>
-      <Button onAction="#submit" fx:id="sum1" mnemonicParsing="false" text="View Summary 1" HBox.margin="$x1" />
-      <Button onAction="#submit" fx:id="sum2" mnemonicParsing="false" text="View Summary 2" HBox.margin="$x1" />
+      <Button fx:id="sum1" mnemonicParsing="false" onAction="#submit" text="View Summary 1" />
+      <Button fx:id="sum2" mnemonicParsing="false" onAction="#submit" text="View Summary 2" />
     </children>
   </HBox>
 </GridPane>

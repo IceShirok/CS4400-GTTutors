@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
 import src.code.model.LoginStore;
 
 public class LoginController extends AbstractController {
-
+    
     @FXML
     private Text message;
 
@@ -51,19 +51,20 @@ public class LoginController extends AbstractController {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connect = DriverManager.getConnection("jdbc:mysql://" + DB_URL);
-
             Statement stmt = connect.createStatement();
-            String strSelect = "SELECT UserType FROM Users WHERE GTID='"
-                    + username + "' AND Password='" + password + "';";
+            
+            String strSelect = "SELECT UserType FROM Users WHERE GTID='" + username + "' AND Password='" + password + "';";
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset.next()) {
                 return rset.getString("UserType");
             }
+            
+            connect.close();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        return INVALID_TAG;
+        return "INVALID";
     }
 
     @Override

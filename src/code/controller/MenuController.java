@@ -12,7 +12,7 @@ public class MenuController extends AbstractController {
     private Text loginInfo;
 
     protected void setLoginDisplay(String username) {
-        loginInfo.setText("Logged in as " + username);
+        loginInfo.setText("Logged in as: " + username);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class MenuController extends AbstractController {
         LoginStore.logOut();
         transition(event, "login");
     }
-    
+
     @Override
     protected void populate(ActionEvent event) {
         // not needed

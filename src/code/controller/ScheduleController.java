@@ -6,8 +6,7 @@ public class ScheduleController extends AbstractController {
 
     @Override
     protected void submit(ActionEvent event) {
-        // TODO Auto-generated method stub
-
+        // TODO: submission to DB
     }
 
     @Override
@@ -17,8 +16,7 @@ public class ScheduleController extends AbstractController {
 
     @Override
     protected void populate(ActionEvent event) {
-        // TODO Auto-generated method stub
-        
+        // TODO: populate with data from search controller
     }
 
 }

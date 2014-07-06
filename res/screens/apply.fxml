@@ -52,7 +52,7 @@
       </TableView>
     </children>
   </HBox>
-  <Label text="Apply to be a tutor!" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+  <Label fx:id="title" text="Apply to be a tutor!" GridPane.columnIndex="0" GridPane.rowIndex="0" />
   <GridPane prefWidth="500.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
     <children>
       <TextField prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="0" />

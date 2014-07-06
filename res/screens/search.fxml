@@ -12,7 +12,9 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="10.0" styleClass="root" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="src.code.controller.SearchController">
+<GridPane alignment="CENTER" hgap="10.0" styleClass="root" vgap="10.0"
+      xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2"
+      fx:controller="src.code.controller.SearchController">
   <Text fx:id="actiontarget" GridPane.columnIndex="0" GridPane.rowIndex="9" />
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -57,8 +59,8 @@
       </TableView>
     </children>
   </HBox>
-  <Button mnemonicParsing="false" text="OK" GridPane.columnIndex="0" GridPane.rowIndex="9" />
-  <Label text="Search for a Tutor" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+  <Button mnemonicParsing="false" text="OK" GridPane.columnIndex="0" GridPane.rowIndex="9" onAction="#submit" />
+  <Label fx:id="title" text="Search for a Tutor" GridPane.columnIndex="0" GridPane.rowIndex="0" />
   <Label text="Fill in the following information." GridPane.columnIndex="0" GridPane.rowIndex="1" />
   <Label text="Available Times/Days" GridPane.columnIndex="0" GridPane.rowIndex="3" />
   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
@@ -78,61 +80,89 @@
   <HBox prefHeight="16.0" prefWidth="500.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
     <children>
       <Label prefHeight="-1.0" prefWidth="20.0" text="M" />
-      <CheckBox mnemonicParsing="false" text="9AM">
+      <CheckBox mnemonicParsing="false" text="9AM" fx:id="m9">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="10AM" HBox.margin="$x1" />
-      <CheckBox mnemonicParsing="false" text="11AM" HBox.margin="$x1" />
-      <CheckBox mnemonicParsing="false" text="12PM" HBox.margin="$x1" />
-      <CheckBox mnemonicParsing="false" text="1PM" HBox.margin="$x1" />
-      <CheckBox mnemonicParsing="false" text="2PM" HBox.margin="$x1" />
-      <CheckBox mnemonicParsing="false" text="3PM" HBox.margin="$x1" />
-      <CheckBox mnemonicParsing="false" text="4PM" HBox.margin="$x1" />
+      <CheckBox mnemonicParsing="false" text="10AM" fx:id="m10">
+        <HBox.margin>
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+        </HBox.margin>
+      </CheckBox>
+      <CheckBox mnemonicParsing="false" text="11AM" fx:id="m11">
+        <HBox.margin>
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+        </HBox.margin>
+      </CheckBox>
+      <CheckBox mnemonicParsing="false" text="12PM" fx:id="m12">
+        <HBox.margin>
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+        </HBox.margin>
+      </CheckBox>
+      <CheckBox mnemonicParsing="false" text="1PM" fx:id="m13">
+        <HBox.margin>
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+        </HBox.margin>
+      </CheckBox>
+      <CheckBox mnemonicParsing="false" text="2PM" fx:id="m14">
+        <HBox.margin>
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+        </HBox.margin>
+      </CheckBox>
+      <CheckBox mnemonicParsing="false" text="3PM" fx:id="m15">
+        <HBox.margin>
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+        </HBox.margin>
+      </CheckBox>
+      <CheckBox mnemonicParsing="false" text="4PM" fx:id="m16">
+        <HBox.margin>
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+        </HBox.margin>
+      </CheckBox>
     </children>
   </HBox>
   <HBox prefHeight="16.0" prefWidth="500.0" GridPane.columnIndex="0" GridPane.rowIndex="5">
     <children>
       <Label prefWidth="20.0" text="T" />
-      <CheckBox mnemonicParsing="false" text="9AM">
+      <CheckBox mnemonicParsing="false" text="9AM" fx:id="t9">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="10AM">
+      <CheckBox mnemonicParsing="false" text="10AM" fx:id="t10">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="11AM">
+      <CheckBox mnemonicParsing="false" text="11AM" fx:id="t11">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="12PM">
+      <CheckBox mnemonicParsing="false" text="12PM" fx:id="t12">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="1PM">
+      <CheckBox mnemonicParsing="false" text="1PM" fx:id="t13">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="2PM">
+      <CheckBox mnemonicParsing="false" text="2PM" fx:id="t14">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="3PM">
+      <CheckBox mnemonicParsing="false" text="3PM" fx:id="t15">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="4PM">
+      <CheckBox mnemonicParsing="false" text="4PM" fx:id="t16">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
     </children>
@@ -140,44 +170,44 @@
   <HBox prefHeight="26.0" prefWidth="500.0" GridPane.columnIndex="0" GridPane.rowIndex="6">
     <children>
       <Label prefWidth="20.0" text="W" />
-      <CheckBox mnemonicParsing="false" text="9AM">
+      <CheckBox mnemonicParsing="false" text="9AM" fx:id="w9">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="10AM">
+      <CheckBox mnemonicParsing="false" text="10AM" fx:id="w10">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="11AM">
+      <CheckBox mnemonicParsing="false" text="11AM" fx:id="w11">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="12PM">
+      <CheckBox mnemonicParsing="false" text="12PM" fx:id="w12">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="1PM">
+      <CheckBox mnemonicParsing="false" text="1PM" fx:id="w13">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="2PM">
+      <CheckBox mnemonicParsing="false" text="2PM" fx:id="w14">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="3PM">
+      <CheckBox mnemonicParsing="false" text="3PM" fx:id="w15">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="4PM">
+      <CheckBox mnemonicParsing="false" text="4PM" fx:id="w16">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
     </children>
@@ -185,44 +215,44 @@
   <HBox prefHeight="16.0" prefWidth="500.0" GridPane.columnIndex="0" GridPane.rowIndex="7">
     <children>
       <Label prefWidth="20.0" text="R" />
-      <CheckBox mnemonicParsing="false" text="9AM">
+      <CheckBox mnemonicParsing="false" text="9AM" fx:id="r9">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="10AM">
+      <CheckBox mnemonicParsing="false" text="10AM" fx:id="r10">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="11AM">
+      <CheckBox mnemonicParsing="false" text="11AM" fx:id="r11">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="12PM">
+      <CheckBox mnemonicParsing="false" text="12PM" fx:id="r12">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="1PM">
+      <CheckBox mnemonicParsing="false" text="1PM" fx:id="r13">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="2PM">
+      <CheckBox mnemonicParsing="false" text="2PM" fx:id="r14">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="3PM">
+      <CheckBox mnemonicParsing="false" text="3PM" fx:id="r15">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="4PM">
+      <CheckBox mnemonicParsing="false" text="4PM" fx:id="r16">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
     </children>
@@ -230,44 +260,44 @@
   <HBox prefHeight="-1.0" prefWidth="500.0" GridPane.columnIndex="0" GridPane.rowIndex="8">
     <children>
       <Label prefWidth="20.0" text="F" />
-      <CheckBox mnemonicParsing="false" text="9AM">
+      <CheckBox mnemonicParsing="false" text="9AM" fx:id="f9">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="10AM">
+      <CheckBox mnemonicParsing="false" text="10AM" fx:id="f10">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="11AM">
+      <CheckBox mnemonicParsing="false" text="11AM" fx:id="f11">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="12PM">
+      <CheckBox mnemonicParsing="false" text="12PM" fx:id="f12">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="1PM">
+      <CheckBox mnemonicParsing="false" text="1PM" fx:id="f13">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="2PM">
+      <CheckBox mnemonicParsing="false" text="2PM" fx:id="f14">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="3PM">
+      <CheckBox mnemonicParsing="false" text="3PM" fx:id="f15">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="4PM">
+      <CheckBox mnemonicParsing="false" text="4PM" fx:id="f16">
         <HBox.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </HBox.margin>
       </CheckBox>
     </children>

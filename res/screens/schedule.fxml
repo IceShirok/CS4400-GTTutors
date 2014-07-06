@@ -46,5 +46,5 @@
       </TableView>
     </children>
   </HBox>
-  <Label text="Select Your Tutor" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+  <Label fx:id="title" text="Select Your Tutor" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 </GridPane>
