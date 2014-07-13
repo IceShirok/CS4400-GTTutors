@@ -1,4 +1,4 @@
-package src.code.controller;
+package code.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,7 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
-import src.code.model.Sum2POJO;
+import code.model.Sum2POJO;
 
 public class SummaryTwoController extends AbstractController {
     

@@ -1,6 +1,5 @@
-package src.code.controller;
+package code.controller;
 
-import src.code.main.GTTutorsLaunch;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import code.main.GTTutorsLaunch;
 
 public abstract class AbstractController {
     

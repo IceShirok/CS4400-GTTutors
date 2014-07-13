@@ -1,4 +1,4 @@
-package src.code.controller;
+package code.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,7 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import src.code.model.LoginStore;
+import code.model.LoginStore;
 
 public class LoginController extends AbstractController {
     

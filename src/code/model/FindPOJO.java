@@ -1,4 +1,4 @@
-package src.code.model;
+package code.model;
 
 public class FindPOJO {
     

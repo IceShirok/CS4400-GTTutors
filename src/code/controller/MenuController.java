@@ -1,10 +1,10 @@
-package src.code.controller;
+package code.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
-import src.code.model.LoginStore;
+import code.model.LoginStore;
 
 public class MenuController extends AbstractController {
 
