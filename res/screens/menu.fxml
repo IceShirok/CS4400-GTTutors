@@ -23,45 +23,37 @@
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
   </rowConstraints>
   <stylesheets>
     <URL value="@../Login.css" />
   </stylesheets>
-  <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+  <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
     <children>
       <Button mnemonicParsing="false" onAction="#goBack" text="Logout" />
     </children>
   </HBox>
-  <Text fx:id="loginInfo" text="Logged in as:" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-  <HBox alignment="CENTER" prefHeight="29.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+  <Label fx:id="loginInfo" text="Logged in as:" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+  <GridPane prefWidth="449.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
     <children>
-      <Button fx:id="search" mnemonicParsing="false" onAction="#submit" text="Search for Tutors" />
-      <Button fx:id="schedule" mnemonicParsing="false" onAction="#submit" text="Schedule a Tutor" />
-      <Button fx:id="rate" onAction="#submit" text="Rate a Tutor" />
+      <Button fx:id="search" mnemonicParsing="false" onAction="#submit" text="Search for Tutors" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+      <Button fx:id="schedule" mnemonicParsing="false" onAction="#submit" text="Schedule a Tutor" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+      <Button fx:id="rate" onAction="#submit" text="Rate a Tutor" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+      <Button fx:id="apply" mnemonicParsing="false" onAction="#submit" text="Apply" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+      <Button fx:id="find" mnemonicParsing="false" onAction="#submit" text="Look Up Schedule" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Button fx:id="sum1" mnemonicParsing="false" onAction="#submit" text="View Summary 1" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+      <Button fx:id="recommend" mnemonicParsing="false" onAction="#submit" text="Recommend a Tutor" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+      <Button fx:id="sum2" mnemonicParsing="false" onAction="#submit" text="View Summary 2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
     </children>
-  </HBox>
-  <HBox alignment="CENTER" prefHeight="29.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-    <children>
-      <Button fx:id="apply" mnemonicParsing="false" onAction="#submit" text="Apply" />
-      <Button fx:id="find" mnemonicParsing="false" onAction="#submit" text="Look Up Schedule" />
-    </children>
-  </HBox>
-  <HBox alignment="CENTER" prefHeight="29.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-    <children>
-      <Button fx:id="recommend" mnemonicParsing="false" onAction="#submit" text="Recommend a Tutor" />
-    </children>
-  </HBox>
-  <HBox alignment="CENTER" prefHeight="29.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-    <children>
-      <Button fx:id="sum1" mnemonicParsing="false" onAction="#submit" text="View Summary 1" />
-      <Button fx:id="sum2" mnemonicParsing="false" onAction="#submit" text="View Summary 2" />
-    </children>
-  </HBox>
+    <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+  </GridPane>
 </GridPane>

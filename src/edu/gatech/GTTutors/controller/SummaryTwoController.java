@@ -3,16 +3,16 @@ package edu.gatech.GTTutors.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.text.Text;
 import edu.gatech.GTTutors.model.Sum2POJO;
 
 public class SummaryTwoController extends AbstractController {
     
     @FXML
-    private Text message;
+    private Label message;
     
     @FXML
     private CheckBox fall;

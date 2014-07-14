@@ -3,13 +3,13 @@ package edu.gatech.GTTutors.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.text.Text;
+import javafx.scene.control.Label;
 import edu.gatech.GTTutors.model.LoginStore;
 
 public class MenuController extends AbstractController {
 
     @FXML
-    private Text loginInfo;
+    private Label loginInfo;
 
     protected void setLoginDisplay(String username) {
         loginInfo.setText("Logged in as: " + username);

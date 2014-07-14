@@ -7,15 +7,15 @@ import java.sql.Statement;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import edu.gatech.GTTutors.model.LoginStore;
 
 public class LoginController extends AbstractController {
     
     @FXML
-    private Text message;
+    private Label message;
 
     @FXML
     private TextField gtid;
