@@ -1,4 +1,4 @@
-package code.controller;
+package edu.gatech.GTTutors.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

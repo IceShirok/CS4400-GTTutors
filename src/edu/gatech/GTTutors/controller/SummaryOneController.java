@@ -1,4 +1,4 @@
-package code.controller;
+package edu.gatech.GTTutors.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,7 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
-import code.model.Sum1POJO;
+import edu.gatech.GTTutors.model.Sum1POJO;
 
 public class SummaryOneController extends AbstractController {
 

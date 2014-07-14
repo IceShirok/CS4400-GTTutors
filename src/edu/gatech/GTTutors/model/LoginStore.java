@@ -1,4 +1,4 @@
-package code.model;
+package edu.gatech.GTTutors.model;
 
 public class LoginStore {
 

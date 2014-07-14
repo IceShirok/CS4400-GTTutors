@@ -1,4 +1,4 @@
-package code.controller;
+package edu.gatech.GTTutors.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,11 +7,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import code.main.GTTutorsLaunch;
+import edu.gatech.GTTutors.main.GTTutorsLaunch;
 
 public abstract class AbstractController {
     
-    public final static String SCREEN_URL = "../../../res/screens/";
+    public final static String SCREEN_URL = "/screens/";
     public final static String FXML_EXT = ".fxml";
     
     @FXML
@@ -33,7 +33,8 @@ public abstract class AbstractController {
             showScene(event, new Scene(root, GTTutorsLaunch.WIDTH, GTTutorsLaunch.HEIGHT));
 
         } catch (Exception e) {
-            System.out.println("Something went wrong with loading the scene...: " + e);
+        	e.printStackTrace();
+//            System.out.println("Something went wrong with loading the scene...: " + e);
         }
     }
     

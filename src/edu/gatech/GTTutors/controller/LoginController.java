@@ -1,4 +1,4 @@
-package code.controller;
+package edu.gatech.GTTutors.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,7 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import code.model.LoginStore;
+import edu.gatech.GTTutors.model.LoginStore;
 
 public class LoginController extends AbstractController {
     
@@ -61,7 +61,7 @@ public class LoginController extends AbstractController {
             
             connect.close();
         } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        	e.printStackTrace();
             System.exit(0);
         }
         return "INVALID";

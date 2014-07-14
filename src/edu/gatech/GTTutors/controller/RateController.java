@@ -1,16 +1,19 @@
-package code.controller;
+package edu.gatech.GTTutors.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
-public class RecommendController extends AbstractController {
-    
+public class RateController extends AbstractController {
+
     @FXML
-    private TextField studentGtid;
+    private ChoiceBox<String> courses;
+    @FXML
+    private TextField name;
     @FXML
     private TextArea description;
     @FXML
@@ -19,7 +22,8 @@ public class RecommendController extends AbstractController {
     @Override
     protected void submit(ActionEvent event) {
         // TODO: implement submission into DB
-        System.out.println(studentGtid.getText());
+        System.out.println(name.getText());
+        System.out.println(courses.getValue());
         System.out.println(description.getText());
         System.out.println(((RadioButton)ratings.getSelectedToggle()).getId());
         // also enforce that ratings must be filled out - no null
@@ -32,7 +36,7 @@ public class RecommendController extends AbstractController {
 
     @Override
     protected void populate(ActionEvent event) {
-        // do not implement - not needed
+        // TODO: implement for course dropdown
     }
 
 }

@@ -1,4 +1,4 @@
-package code.controller;
+package edu.gatech.GTTutors.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,7 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import code.model.FindPOJO;
+import edu.gatech.GTTutors.model.FindPOJO;
 
 public class FindController extends AbstractController {
     
