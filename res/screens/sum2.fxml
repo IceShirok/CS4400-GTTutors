@@ -12,7 +12,6 @@
 <?import javafx.scene.text.Text?>
 
 <GridPane alignment="CENTER" hgap="10.0" styleClass="root" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.gatech.GTTutors.controller.SummaryTwoController">
-  <Label fx:id="message" GridPane.columnIndex="0" GridPane.rowIndex="2" />
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
   </columnConstraints>
@@ -25,31 +24,34 @@
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
   </rowConstraints>
   <stylesheets>
     <URL value="@../Login.css" />
   </stylesheets>
-  <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
+  <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="5">
     <children>
       <Button mnemonicParsing="false" onAction="#goBack" text="Back" />
     </children>
   </HBox>
-  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
     <children>
       <TableView fx:id="sum2Table" prefHeight="200.0" prefWidth="511.0">
         <columns>
-          <TableColumn fx:id="course" prefWidth="75.0" text="Course" />
-          <TableColumn fx:id="semester" maxWidth="5000.0" minWidth="10.0" prefWidth="78.0" text="Semester" />
-          <TableColumn fx:id="numTa" maxWidth="5000.0" minWidth="10.0" prefWidth="81.0" text="TA" />
-          <TableColumn fx:id="avgTa" maxWidth="5000.0" minWidth="10.0" prefWidth="87.0" text="Avg Rating" />
-          <TableColumn fx:id="numNot" maxWidth="5000.0" minWidth="10.0" prefWidth="71.0" text="non-TA" />
-          <TableColumn fx:id="avgNot" maxWidth="5000.0" minWidth="10.0" prefWidth="84.0" text="Avg Rating" />
+          <TableColumn prefWidth="75.0" text="Course" fx:id="course" />
+          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="78.0" text="Semester" fx:id="semester" />
+          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="81.0" text="TA" fx:id="numTa" />
+          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="87.0" text="Avg Rating" fx:id="avgTa" />
+          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="71.0" text="non-TA" fx:id="numNot" />
+          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="84.0" text="Avg Rating" fx:id="avgNot" />
         </columns>
       </TableView>
     </children>
   </HBox>
-  <Button mnemonicParsing="false" onAction="#submit" text="OK" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-  <BorderPane prefHeight="50.0" prefWidth="511.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+  <BorderPane prefHeight="50.0" prefWidth="511.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+    <bottom>
+      <Button mnemonicParsing="false" onAction="#submit" text="OK" />
+    </bottom>
     <right>
       <HBox prefHeight="24.0" prefWidth="511.0">
         <children>
@@ -63,5 +65,7 @@
       <Label text="Academic Year 2013-2014" />
     </top>
   </BorderPane>
-  <Label id="title" text="Summary 2" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+  <Text id="title" text="Summary 2" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+  <Separator prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+  <Label text="See a summary of the average ratings of all tutors per course per semester." GridPane.columnIndex="0" GridPane.rowIndex="1" />
 </GridPane>

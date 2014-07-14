@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class GTTutorsLaunch extends Application {
     
     public final static int WIDTH = 600;
-    public final static int HEIGHT = 400;
+    public final static int HEIGHT = 500;
     
     public final static String SCREEN_URL = "/screens/";
     public final static String FXML_EXT = ".fxml";

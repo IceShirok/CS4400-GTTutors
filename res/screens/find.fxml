@@ -23,18 +23,19 @@
     <RowConstraints maxHeight="16.0" minHeight="10.0" prefHeight="16.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="16.0" minHeight="10.0" prefHeight="16.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
   </rowConstraints>
   <stylesheets>
     <URL value="@../Login.css" />
   </stylesheets>
-  <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
+  <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="5">
     <children>
       <Button mnemonicParsing="false" onAction="#goBack" text="Back" />
     </children>
   </HBox>
-  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
     <children>
       <TableView fx:id="findTable" prefHeight="150.0" prefWidth="511.0">
         <columns>
@@ -48,11 +49,12 @@
     </children>
   </HBox>
   <Button mnemonicParsing="false" onAction="#submit" text="OK" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-  <Label id="title" text="Find Tutor Schedule" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+  <Text id="title" text="Find Tutor Schedule" GridPane.columnIndex="0" GridPane.rowIndex="0" />
   <HBox prefHeight="100.0" prefWidth="500.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
     <children>
       <Label text="Enter Tutor GTID:" />
       <TextField fx:id="gtid" prefWidth="200.0" />
     </children>
   </HBox>
+  <Separator prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="3" />
 </GridPane>

@@ -12,7 +12,6 @@
 <?import javafx.scene.text.Text?>
 
 <GridPane alignment="CENTER" hgap="10.0" styleClass="root" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.gatech.GTTutors.controller.SummaryOneController">
-  <Label fx:id="actiontarget" GridPane.columnIndex="0" GridPane.rowIndex="2" />
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
   </columnConstraints>
@@ -21,33 +20,36 @@
   </padding>
   <rowConstraints>
     <RowConstraints maxHeight="16.0" minHeight="10.0" prefHeight="16.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="16.0" minHeight="10.0" prefHeight="16.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="16.0" minHeight="10.0" prefHeight="16.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
   </rowConstraints>
   <stylesheets>
     <URL value="@../Login.css" />
   </stylesheets>
-  <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
+  <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="5">
     <children>
       <Button mnemonicParsing="false" onAction="#goBack" text="Back" />
     </children>
   </HBox>
-  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
     <children>
       <TableView fx:id="sum1Table" prefHeight="150.0" prefWidth="511.0">
         <columns>
-          <TableColumn fx:id="course" prefWidth="75.0" text="Course" />
-          <TableColumn fx:id="semester" maxWidth="5000.0" minWidth="10.0" prefWidth="108.0" text="Semester" />
-          <TableColumn fx:id="numStudents" maxWidth="5000.0" minWidth="10.0" prefWidth="126.0" text="# Students" />
-          <TableColumn fx:id="numTutors" maxWidth="5000.0" minWidth="10.0" prefWidth="109.0" text="# Tutors" />
+          <TableColumn prefWidth="75.0" text="Course" fx:id="course" />
+          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="108.0" text="Semester" fx:id="semester" />
+          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="126.0" text="# Students" fx:id="numStudents" />
+          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="109.0" text="# Tutors" fx:id="numTutors" />
         </columns>
       </TableView>
     </children>
   </HBox>
-  <Button mnemonicParsing="false" onAction="#submit" text="OK" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-  <BorderPane prefHeight="50.0" prefWidth="511.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+  <BorderPane prefHeight="50.0" prefWidth="511.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+    <bottom>
+      <Button mnemonicParsing="false" onAction="#submit" text="OK" />
+    </bottom>
     <right>
       <HBox prefHeight="24.0" prefWidth="511.0">
         <children>
@@ -61,5 +63,7 @@
       <Label text="Academic Year 2013-2014" />
     </top>
   </BorderPane>
-  <Label id="title" text="Summary 1" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+  <Text id="title" text="Summary 1" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+  <Separator prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+  <Label text="See a summary of the number of tutor and number of student who used tutors in each class." wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 </GridPane>

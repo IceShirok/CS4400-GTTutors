@@ -9,6 +9,26 @@ import edu.gatech.GTTutors.model.LoginStore;
 public class MenuController extends AbstractController {
 
     @FXML
+    private Button search;
+    @FXML
+    private Button schedule;
+    @FXML
+    private Button rate;
+    
+    @FXML
+    private Button apply;
+    @FXML
+    private Button find;
+    
+    @FXML
+    private Button recommend;
+    
+    @FXML
+    private Button sum1;
+    @FXML
+    private Button sum2;
+
+    @FXML
     private Label loginInfo;
 
     protected void setLoginDisplay(String username) {

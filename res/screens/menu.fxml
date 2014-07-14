@@ -32,12 +32,11 @@
       <Button mnemonicParsing="false" onAction="#goBack" text="Logout" />
     </children>
   </HBox>
-  <Label fx:id="loginInfo" text="Logged in as:" GridPane.columnIndex="1" GridPane.rowIndex="0" />
   <GridPane prefWidth="449.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
     <children>
       <Button fx:id="search" mnemonicParsing="false" onAction="#submit" text="Search for Tutors" GridPane.columnIndex="0" GridPane.rowIndex="0" />
       <Button fx:id="schedule" mnemonicParsing="false" onAction="#submit" text="Schedule a Tutor" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-      <Button fx:id="rate" onAction="#submit" text="Rate a Tutor" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+      <Button fx:id="rate" mnemonicParsing="false" onAction="#submit" text="Rate a Tutor" GridPane.columnIndex="2" GridPane.rowIndex="0" />
       <Button fx:id="apply" mnemonicParsing="false" onAction="#submit" text="Apply" GridPane.columnIndex="0" GridPane.rowIndex="1" />
       <Button fx:id="find" mnemonicParsing="false" onAction="#submit" text="Look Up Schedule" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Button fx:id="sum1" mnemonicParsing="false" onAction="#submit" text="View Summary 1" GridPane.columnIndex="0" GridPane.rowIndex="3" />
@@ -56,4 +55,5 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
   </GridPane>
+  <Label fx:id="loginInfo" text="Logged in as:" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 </GridPane>

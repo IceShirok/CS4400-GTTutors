@@ -33,7 +33,13 @@ root {
    -fx-fill: #ffffff;
 }
 
+#title {
+  -fx-fill: #ffffff;
+  -fx-font-weight: bold;
+  -fx-font-size: 24px;
+}
+
 #message {
-  -fx-fill: FIREBRICK;
+  -fx-fill: PINK;
   -fx-font-weight: bold;
 }
