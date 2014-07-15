@@ -13,11 +13,14 @@ public class GTTutorsLaunch extends Application {
     
     public final static String SCREEN_URL = "/screens/";
     public final static String FXML_EXT = ".fxml";
+    public DatabaseController db;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         String foo = SCREEN_URL+"login"+FXML_EXT;
-
+        
+        db = new DatabaseController();
+        
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(foo));
         Parent root = (Parent) fxmlLoader.load();
         Scene mainScreen = new Scene(root, WIDTH, HEIGHT);
