@@ -3,6 +3,7 @@ package edu.gatech.GTTutors.main;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseController {
@@ -44,6 +45,12 @@ public class DatabaseController {
 			return s.executeQuery(query);
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			if(con != null) {
+				try {
+					con.close();
+				} catch(SQLException e) {}
+			}
 		}
 		return null;
 	}
