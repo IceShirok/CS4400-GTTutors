@@ -38,12 +38,13 @@ public class LoginController extends AbstractController {
         // do nothing - login controller does not use it
     }
 
-    // cs4400_Group_30 - ArdHSY4u
+    
     public final static String INVALID_TAG = "INVALID";
 
     public static String validateLogin(String username, String password) {
     	String query = "SELECT UserType FROM Users WHERE GTID='" + username + "' AND Password='" + password + "';";
     	ResultSet rset = DatabaseController.sendQuery(query);
+
     	try {
     		if(rset.next()) {
         		return rset.getString("UserType");
