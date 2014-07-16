@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import edu.gatech.GTTutors.model.LoginStore;
 
 public class MenuController extends AbstractController {
@@ -27,6 +28,24 @@ public class MenuController extends AbstractController {
     private Button sum1;
     @FXML
     private Button sum2;
+    
+    
+    @FXML
+    private GridPane student;
+    @FXML
+    private GridPane tutorstudent;
+    @FXML
+    private GridPane professor;
+    @FXML
+    private GridPane administrator;
+    
+    @FXML
+    private GridPane[] rows;
+    
+    @FXML
+    protected void initialize() {
+        rows = new GridPane[]{tutorstudent, student, professor, administrator};
+    }
 
     @FXML
     private Label loginInfo;
@@ -49,7 +68,11 @@ public class MenuController extends AbstractController {
 
     @Override
     protected void populate(ActionEvent event) {
-        // not needed
+        setLoginDisplay(LoginStore.getUsername());
+        
+        for(GridPane row : rows) {
+            row.setVisible((row.getId().toLowerCase()).contains(LoginStore.getUserType().toLowerCase()));
+        }
     }
 
 }

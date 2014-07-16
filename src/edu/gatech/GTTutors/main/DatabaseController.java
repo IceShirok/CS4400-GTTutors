@@ -8,13 +8,14 @@ import java.sql.Statement;
 
 public class DatabaseController {
 
-    private static final String DB_URL = "jdbc:mysql://academic-mysql.cc.gatech.edu/";
-    private static final String GROUP = "cs4400_Group_30";
-    private static final String PW = "ArdHSY4u";
+    public static final String DB_URL = "jdbc:mysql://academic-mysql.cc.gatech.edu/";
+    public static final String GROUP = "cs4400_Group_30";
+    public static final String PW = "ArdHSY4u";
+    public static final String[] USER_TYPES = {"Student", "Tutor", "Professor", "Administrator"};
 		
 	public DatabaseController() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();				
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
