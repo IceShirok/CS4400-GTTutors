@@ -89,7 +89,7 @@ CREATE TABLE Rates (
     School      VARCHAR(20) NOT NULL,
     Number      VARCHAR(10) NOT NULL,
     Semester    VARCHAR(9)  NOT NULL,
-    Description VARCHAR(150),
+    Description TEXT,
     Rating INT NOT NULL CHECK (Rating > 0 AND Rating < 6),
     FOREIGN KEY (UGTID) REFERENCES Undergraduate(GTID),
     FOREIGN KEY (TGTID) REFERENCES Tutor(GTID),
@@ -100,7 +100,7 @@ CREATE TABLE Rates (
 CREATE TABLE Recommends (
     PGTID       CHAR(9)     NOT NULL,
     TGTID       CHAR(9)     NOT NULL,
-    Description VARCHAR(150),
+    Description TEXT,
     Rating      INT         NOT NULL CHECK(Rating > 0 AND Rating < 6),
     FOREIGN KEY (PGTID) REFERENCES Professor(GTID),
     FOREIGN KEY (TGTID) REFERENCES Tutor(GTID),
