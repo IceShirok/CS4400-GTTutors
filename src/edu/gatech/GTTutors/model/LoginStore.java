@@ -29,4 +29,8 @@ public class LoginStore {
         return userType;
     }
 
+    public String getCurrentSemester() {
+        return "Summer";
+    }
+
 }
