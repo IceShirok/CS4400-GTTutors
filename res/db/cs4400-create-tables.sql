@@ -103,7 +103,7 @@ CREATE TABLE Recommends (
     Description TEXT,
     Rating      INT         NOT NULL CHECK(Rating > 0 AND Rating < 6),
     FOREIGN KEY (PGTID) REFERENCES Professor(GTID),
-    FOREIGN KEY (TGTID) REFERENCES Tutor(GTID),
+    FOREIGN KEY (TGTID) REFERENCES Student(GTID),
     PRIMARY KEY (PGTID, TGTID)
 );
 

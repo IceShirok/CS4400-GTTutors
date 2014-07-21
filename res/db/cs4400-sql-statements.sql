@@ -19,7 +19,7 @@ SELECT * FROM Professor WHERE GTID='555555555';
 SELECT * FROM Administrator WHERE GTID='555555555';
 
 
-/* ===== SEARCH SCREEN ===== */
+/* ===== SEARCH & SCHEDULE SCREEN ===== */
 
 /* Get courses which has available tutors */
 SELECT DISTINCT T.School, T.Number
@@ -39,8 +39,8 @@ SELECT T.Name, T.Email, T.AvgProf, T.NumProf, T.AvgProf, T.NumProf
     GROUP BY T.GTID
     ORDER BY T.AvgStudent ASC, T.GTID ASC;
 
-
-/* ===== SCHEDULE SCREEN ===== */
+/* Schedule a tutor */
+INSERT INTO Hires VALUES ("700000000","CS","4400","1PM","Summer","Friday");
 
 
 /* ===== RATES SCREEN ===== */
