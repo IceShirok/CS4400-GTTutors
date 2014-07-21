@@ -1,5 +1,7 @@
 package edu.gatech.GTTutors.controller;
 
+import java.util.Set;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,6 +48,27 @@ public abstract class AbstractController {
         Stage stage = (Stage) node.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+    }
+    
+    protected String parseTime(String stime) {
+        int time = Integer.parseInt(stime);
+        if(time < 12) {
+            return "\""+time+"AM"+"\"";
+        } else if(time == 12) {
+            return "\""+time+"PM"+"\"";
+        } else {
+            return "\""+(time-12)+"PM"+"\"";
+        }
+    }
+    
+    protected String processInClause(Set<String> set) {
+        String aString = "(";
+        for(String item : set) {
+            aString += item + ",";
+        }
+        aString = aString.substring(0, aString.length()-1);
+        aString += ")";
+        return aString;
     }
 
 }

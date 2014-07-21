@@ -148,27 +148,6 @@ public class SearchController extends AbstractController {
         thursdays = new CheckBox[]{r9, r10, r11, r12, r13, r14, r15, r16};
         fridays = new CheckBox[]{f9, f10, f11, f12, f13, f14, f15, f16};
     }
-    
-    private String parseTime(String stime) {
-        int time = Integer.parseInt(stime);
-        if(time < 12) {
-            return "\""+time+"AM"+"\"";
-        } else if(time == 12) {
-            return "\""+time+"PM"+"\"";
-        } else {
-            return "\""+(time-12)+"PM"+"\"";
-        }
-    }
-    
-    private String processInClause(Set<String> set) {
-        String aString = "(";
-        for(String item : set) {
-            aString += item + ",";
-        }
-        aString = aString.substring(0, aString.length()-1);
-        aString += ")";
-        return aString;
-    }
 
     @Override
     protected void submit(ActionEvent event) {
