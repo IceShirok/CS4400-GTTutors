@@ -1,13 +1,23 @@
 package edu.gatech.GTTutors.controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import edu.gatech.GTTutors.main.DatabaseController;
+import edu.gatech.GTTutors.main.GTTutorsLaunch;
 
 public class RecommendController extends AbstractController {
+    
+    @FXML
+    private Label message;
     
     @FXML
     private TextField studentGtid;
@@ -18,11 +28,16 @@ public class RecommendController extends AbstractController {
 
     @Override
     protected void submit(ActionEvent event) {
-        // TODO: implement submission into DB
-        System.out.println(studentGtid.getText());
-        System.out.println(description.getText());
-        System.out.println(((RadioButton)ratings.getSelectedToggle()).getId());
-        // also enforce that ratings must be filled out - no null
+        String tutorGtid = studentGtid.getText();
+        String desc = description.getText();
+        RadioButton selected = (RadioButton)ratings.getSelectedToggle();
+        if(tutorGtid == null || desc == null || selected == null
+                || tutorGtid.length() == 0 || desc.length() == 0) {
+            message.setText("Please fill out all entries.");
+        } else {
+            int rating = Integer.parseInt(selected.getId().substring(4));
+            submitRecommendForm(tutorGtid, desc, rating);
+        }
     }
 
     @Override
@@ -33,6 +48,33 @@ public class RecommendController extends AbstractController {
     @Override
     protected void populate(ActionEvent event) {
         // do not implement - not needed
+    }
+    
+    private void submitRecommendForm(String name, String description, int rating) {
+        Connection connect = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connect = (Connection) DriverManager.getConnection(DatabaseController.DB_URL + DatabaseController.GROUP,
+                                                                DatabaseController.GROUP,
+                                                                DatabaseController.PW);
+            Statement stmt = connect.createStatement();
+            
+            String strSelect = "INSERT INTO Recommends VALUES(\""+ GTTutorsLaunch.log.getUsername() + "\", \""
+                                                                + name + "\", \""
+                                                                + description + "\", "
+                                                                + rating + ");";
+            System.out.println(strSelect);
+            stmt.executeUpdate(strSelect);
+        } catch (Exception e) {
+            e.printStackTrace();
+            message.setText("GTID is not valid or you have already recommended this student.");
+        } finally {
+            try {
+                connect.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

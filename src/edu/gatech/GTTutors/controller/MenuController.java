@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import edu.gatech.GTTutors.model.LoginStore;
+import edu.gatech.GTTutors.main.GTTutorsLaunch;
 
 public class MenuController extends AbstractController {
 
@@ -62,16 +62,17 @@ public class MenuController extends AbstractController {
 
     @Override
     protected void goBack(ActionEvent event) {
-        LoginStore.logOut();
+        GTTutorsLaunch.log.logOut();
         transition(event, "login");
     }
 
     @Override
     protected void populate(ActionEvent event) {
-        setLoginDisplay(LoginStore.getUsername());
+        setLoginDisplay(GTTutorsLaunch.log.getUsername());
         
         for(GridPane row : rows) {
-            row.setVisible((row.getId().toLowerCase()).contains(LoginStore.getUserType().toLowerCase()));
+            row.setVisible(true);
+            //row.setVisible((row.getId().toLowerCase()).contains(LoginStore.getUserType().toLowerCase()));
         }
     }
 

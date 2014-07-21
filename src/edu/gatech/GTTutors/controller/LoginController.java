@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import edu.gatech.GTTutors.main.DatabaseController;
-import edu.gatech.GTTutors.model.LoginStore;
+import edu.gatech.GTTutors.main.GTTutorsLaunch;
 
 public class LoginController extends AbstractController {
     
@@ -30,12 +30,13 @@ public class LoginController extends AbstractController {
         if (userType.equals("INVALID")) {
             message.setText("Username or password is invalid. Try again or contact your sysadmin.");
         } else {
-            LoginStore.logIn(gtid.getText(), userType);
+            GTTutorsLaunch.log.logIn(gtid.getText(), userType);
+            System.out.println(GTTutorsLaunch.log.getUsername());
             transition(event, "menu");
         }
     }
 
-    private static String validateLogin(String username, String password) {
+    private String validateLogin(String username, String password) {
         Connection connect = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");

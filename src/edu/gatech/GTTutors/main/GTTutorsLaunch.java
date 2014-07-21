@@ -1,5 +1,6 @@
 package edu.gatech.GTTutors.main;
 
+import edu.gatech.GTTutors.model.LoginStore;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,12 +15,14 @@ public class GTTutorsLaunch extends Application {
     public final static String SCREEN_URL = "/screens/";
     public final static String FXML_EXT = ".fxml";
     public DatabaseController db;
+    public static LoginStore log;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         String foo = SCREEN_URL+"login"+FXML_EXT;
         
         db = new DatabaseController();
+        log = new LoginStore();
         
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(foo));
         Parent root = (Parent) fxmlLoader.load();
