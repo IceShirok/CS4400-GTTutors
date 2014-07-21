@@ -37,6 +37,10 @@ public class SearchController extends AbstractController {
     @FXML
     private TableColumn<SearchPOJO, String> email;
     @FXML
+    private TableColumn<SearchPOJO, String> day;
+    @FXML
+    private TableColumn<SearchPOJO, String> time;
+    @FXML
     private TableColumn<SearchPOJO, Double> avgProf;
     @FXML
     private TableColumn<SearchPOJO, Integer> numProf;
@@ -235,6 +239,8 @@ public class SearchController extends AbstractController {
     private void populateResults(String school, String number, String times, String days) {
         name.setCellValueFactory(new PropertyValueFactory<SearchPOJO,String>("name"));
         email.setCellValueFactory(new PropertyValueFactory<SearchPOJO,String>("email"));
+        day.setCellValueFactory(new PropertyValueFactory<SearchPOJO,String>("day"));
+        time.setCellValueFactory(new PropertyValueFactory<SearchPOJO,String>("time"));
         avgProf.setCellValueFactory(new PropertyValueFactory<SearchPOJO,Double>("avgProf"));
         numProf.setCellValueFactory(new PropertyValueFactory<SearchPOJO,Integer>("numProf"));
         avgStudent.setCellValueFactory(new PropertyValueFactory<SearchPOJO,Double>("avgStudent"));
@@ -248,14 +254,13 @@ public class SearchController extends AbstractController {
                                                                 DatabaseController.PW);
             Statement stmt = connect.createStatement();
             
-            String strSelect = "SELECT T.Name, T.Email, T.AvgProf, T.NumProf, T.AvgProf, T.NumProf"
-                + " FROM TutorRatings T NATURAL JOIN AvailableTimeSlots"
+            String strSelect = "SELECT T.Name, T.Email, T.AvgProf, T.NumProf, T.AvgProf, T.NumProf, A.Weekday, A.Time"
+                + " FROM TutorRatings T NATURAL JOIN AvailableTimeSlots A"
                 + " WHERE Semester=\"" + GTTutorsLaunch.log.getCurrentSemester() + "\""
                     + " AND School=\"" + school + "\""
                     + " AND Number=\"" + number + "\""
                     + " AND Weekday IN " + days
                     + " AND Time IN " + times
-                + " GROUP BY T.GTID"
                 + " ORDER BY T.AvgStudent ASC, T.GTID ASC;";
             System.out.println(strSelect);
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -264,13 +269,55 @@ public class SearchController extends AbstractController {
             while(rset.next()) {
                 String name = (rset.getString("Name"));
                 String email = (rset.getString("Email"));
+                String day = (rset.getString("Weekday"));
+                String time = (rset.getString("Time"));
                 double avgProf = (rset.getDouble("AvgProf"));
                 int numProf = (rset.getInt("NumProf"));
                 double avgStudent = (rset.getDouble("AvgProf"));
                 int numStudent = (rset.getInt("NumProf"));
-                row.add(new SearchPOJO(name, email, avgProf, numProf, avgStudent, numStudent));
+                row.add(new SearchPOJO(name, email, day, time, avgProf, numProf, avgStudent, numStudent));
             }
             searchTable.setItems(row);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connect.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    @FXML
+    protected void schedule() {
+        System.out.println("I'm scheduling!");
+        SearchPOJO selectedTutor = searchTable.getSelectionModel().getSelectedItem();
+        if(selectedTutor == null) {
+            message.setText("Please select a tutor first.");
+            return;
+        }
+        
+        String[] courseSplit = courses.getValue().split(" ");
+        
+        Connection connect = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connect = (Connection) DriverManager.getConnection(DatabaseController.DB_URL + DatabaseController.GROUP,
+                                                                DatabaseController.GROUP,
+                                                                DatabaseController.PW);
+            Statement stmt = connect.createStatement();
+            
+            String strSelect = "INSERT INTO Hires VALUES ("
+                    + "\"" + GTTutorsLaunch.log.getUsername() + "\","
+                    + "\"" + courseSplit[0] + "\","
+                    + "\"" + courseSplit[1] + "\","
+                    + "\"" + selectedTutor.getTime() + "\","
+                    + "\"" + GTTutorsLaunch.log.getCurrentSemester() + "\","
+                    + "\"" + selectedTutor.getDay() + "\""
+                    + ");";
+            System.out.println(strSelect);
+            stmt.executeUpdate(strSelect);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
