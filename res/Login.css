@@ -9,7 +9,7 @@ root {
 
 .text {
     -fx-font-size: 12px;
-    -fx-fill: #ffffff;
+    -fx-fill: #000000;
 }
 
 .label {
