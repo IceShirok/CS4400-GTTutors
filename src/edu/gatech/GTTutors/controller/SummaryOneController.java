@@ -99,13 +99,33 @@ public class SummaryOneController extends AbstractController {
             ResultSet rset = stmt.executeQuery(query);
             
             ObservableList<Sum1POJO> rows = FXCollections.observableArrayList();
+            String last = "";
+            int sSum = 0, tSum = 0;
             while(rset.next()) {
             	String course = rset.getString("School") + rset.getString("Number");
+            	if(course.equals(last)) {
+            		course = "";
+            	} else {
+            		last = course;
+            		if(rows.size() > 0) {
+	            		rows.add(new Sum1POJO("", "Total", sSum, tSum));
+	            		sSum = tSum = 0;
+            		}
+            	}
             	String semester = rset.getString("Semester");
             	int numStudents = rset.getInt("SGTID");
             	int numTutors = rset.getInt("TGTID");
+            	sSum += numStudents;
+            	tSum += numTutors;
             	rows.add(new Sum1POJO(course, semester, numStudents, numTutors));            	
             }
+            rows.add(new Sum1POJO("", "Total", sSum, tSum));
+            sSum = tSum = 0;
+            for(Sum1POJO p : rows) {
+            	sSum += p.getNumStudents();
+            	tSum += p.getNumTutors();
+            }
+            rows.add(new Sum1POJO("", "Grand Total", sSum, tSum));
             sum1Table.setItems(rows);
         } catch(Exception e) {
         	e.printStackTrace();
