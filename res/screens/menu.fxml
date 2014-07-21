@@ -39,8 +39,7 @@
   <Label fx:id="loginInfo" text="Logged in as:" GridPane.columnIndex="1" GridPane.rowIndex="0" />
   <GridPane fx:id="student" GridPane.columnIndex="1" GridPane.rowIndex="1">
     <Button fx:id="search" mnemonicParsing="false" onAction="#submit" text="Search for Tutors" GridPane.columnIndex="0" />
-    <Button fx:id="schedule" mnemonicParsing="false" onAction="#submit" text="Schedule a Tutor" GridPane.columnIndex="1" />
-    <Button fx:id="rate" mnemonicParsing="false" onAction="#submit" text="Rate a Tutor" GridPane.columnIndex="2" />
+    <Button fx:id="rate" mnemonicParsing="false" onAction="#submit" text="Rate a Tutor" GridPane.columnIndex="1" />
   </GridPane>
   <GridPane fx:id="tutorstudent" GridPane.columnIndex="1" GridPane.rowIndex="2">
     <Button fx:id="apply" mnemonicParsing="false" onAction="#submit" text="Apply" GridPane.columnIndex="0" />

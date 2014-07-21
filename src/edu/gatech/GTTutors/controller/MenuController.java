@@ -12,8 +12,6 @@ public class MenuController extends AbstractController {
     @FXML
     private Button search;
     @FXML
-    private Button schedule;
-    @FXML
     private Button rate;
     
     @FXML
