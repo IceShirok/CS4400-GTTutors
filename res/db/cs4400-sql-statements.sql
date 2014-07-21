@@ -4,7 +4,22 @@
 =======================
 */
 
-/* SEARCH SCREEN */
+/* ===== LOGIN SCREEN ===== */
+
+/* Checking valid login */
+SELECT * FROM User WHERE GTID='700000007' AND Password='student';
+SELECT * FROM User WHERE GTID='700000015' AND Password='student';
+SELECT * FROM User WHERE GTID='900000003' AND Password='prof';
+SELECT * FROM User WHERE GTID='555555555' AND Password='admin';
+
+/* Checking user type */
+SELECT * FROM Student WHERE GTID='555555555';
+SELECT * FROM Tutor WHERE GTID='555555555';
+SELECT * FROM Professor WHERE GTID='555555555';
+SELECT * FROM Administrator WHERE GTID='555555555';
+
+
+/* ===== SEARCH SCREEN ===== */
 
 /* Get courses which has available tutors */
 SELECT DISTINCT T.School, T.Number
@@ -25,12 +40,37 @@ SELECT T.Name, T.Email, T.AvgProf, T.NumProf, T.AvgProf, T.NumProf
     ORDER BY T.AvgStudent ASC, T.GTID ASC;
 
 
-/* RECOMMENDS SCREEN */
+/* ===== SCHEDULE SCREEN ===== */
+
+
+/* ===== RATES SCREEN ===== */
+INSERT INTO Rates VALUES ("700000007", "700000016", "CS", "1332", "Fall", "This tutor was the best tutor I've ever had.", 1);
+
+
+/* ===== APPLY SCREEN ===== */
+
+
+/* ===== FIND SCREEN ===== */
+SELECT Weekday, Time, Name, Email, School, Number
+    FROM TutorScheduleInfo
+    WHERE TGTID="700000015" AND Semester="Summer";
+
+
+/* ===== RECOMMENDS SCREEN ===== */
 INSERT INTO Recommends VALUES ("900000003", "700000000", "This student was the best student I've ever had.", 1);
 
 
-/* VIEWS */
-/*
+/* ===== SUM1 SCREEN ===== */
+
+
+/* ===== SUM2 SCREEN ===== */
+
+
+/* ===== VIEWS ===== */
+CREATE VIEW TutorComplete AS (
+    SELECT * FROM User NATURAL JOIN Student NATURAL JOIN Tutor
+);
+
 CREATE VIEW TutorScheduleInfo AS (
 	SELECT T.GTID AS TGTID,
 	H.GTID AS UGTID, S.Email, S.Name,
@@ -64,5 +104,3 @@ CREATE VIEW TutorRatings AS (
 		GROUP BY T.GTID, T.Name, T.Email
 		ORDER BY AvgStudent ASC, T.Name ASC
 );
-
-*/

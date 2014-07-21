@@ -1,5 +1,8 @@
 package edu.gatech.GTTutors.controller;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -39,7 +42,18 @@ public class SummaryTwoController extends AbstractController {
 
     @Override
     protected void submit(ActionEvent event) {
-        populateResults();
+        Set<String> semestersSet = new LinkedHashSet<>();
+        if(fall.isSelected()) {
+            semestersSet.add("Fall");
+        }
+        if(spring.isSelected()) {
+            semestersSet.add("Spring");
+        }
+        if(summer.isSelected()) {
+            semestersSet.add("Summer");
+        }
+        String semesters = processInClause(semestersSet);
+        populateResults(semesters);
     }
 
     @Override
@@ -52,7 +66,7 @@ public class SummaryTwoController extends AbstractController {
         // do not implement - not needed
     }
     
-    private void populateResults() {
+    private void populateResults(String semesters) {
         // TODO: implement
         course.setCellValueFactory(new PropertyValueFactory<Sum2POJO,String>("course"));
         semester.setCellValueFactory(new PropertyValueFactory<Sum2POJO,String>("semester"));

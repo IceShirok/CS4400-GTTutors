@@ -46,10 +46,13 @@ public class LoginController extends AbstractController {
             Statement stmt = connect.createStatement();
             
             String strSelect = "SELECT * FROM User WHERE GTID='" + username + "' AND Password='" + password + "';";
+            System.out.println(strSelect);
             ResultSet rset = stmt.executeQuery(strSelect);
+            
             if (rset.next()) {                
                 for(String type : DatabaseController.USER_TYPES) {
                     strSelect = "SELECT * FROM " + type + " WHERE GTID='" + username + "';";
+                    System.out.println(strSelect);
                     rset = stmt.executeQuery(strSelect);
                     if(rset.next()) {
                         return type;

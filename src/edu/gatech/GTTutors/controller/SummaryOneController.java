@@ -48,8 +48,13 @@ public class SummaryOneController extends AbstractController {
         if(summer.isSelected()) {
             semestersSet.add("Summer");
         }
-        String semesters = processInClause(semestersSet);
-        populateResults(semesters);
+        
+        if(semestersSet.isEmpty()) {
+            message.setText("Didn't select a semester!");
+        } else {
+            String semesters = processInClause(semestersSet);
+            populateResults(semesters);
+        }
     }
 
     @Override
