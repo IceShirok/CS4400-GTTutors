@@ -45,14 +45,14 @@
   </HBox>
   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="10">
     <children>
-      <TableView prefHeight="150.0" prefWidth="511.0">
+      <TableView fx:id="searchTable" prefHeight="150.0" prefWidth="511.0">
         <columns>
-          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="128.0" text="Name" />
-          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="116.0" text="Email" />
-          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="66.0" text="Avg. Prof. Rating" />
-          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="55.0" text="# Prof." />
-          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="54.0" text="Avg. Student Rating" />
-          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="83.0" text="# Students" />
+          <TableColumn fx:id="name" maxWidth="5000.0" minWidth="10.0" prefWidth="128.0" text="Name" />
+          <TableColumn fx:id="email" maxWidth="5000.0" minWidth="10.0" prefWidth="116.0" text="Email" />
+          <TableColumn fx:id="avgProf" maxWidth="5000.0" minWidth="10.0" prefWidth="66.0" text="Avg. Prof. Rating" />
+          <TableColumn fx:id="numProf" maxWidth="5000.0" minWidth="10.0" prefWidth="55.0" text="# Prof." />
+          <TableColumn fx:id="avgStudent" maxWidth="5000.0" minWidth="10.0" prefWidth="54.0" text="Avg. Student Rating" />
+          <TableColumn fx:id="numStudent" maxWidth="5000.0" minWidth="10.0" prefWidth="83.0" text="# Students" />
         </columns>
       </TableView>
     </children>
@@ -64,7 +64,7 @@
   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
     <children>
       <Label text="Course" />
-      <ChoiceBox>
+      <ChoiceBox fx:id="courses">
         <items>
           <FXCollections fx:factory="observableArrayList">
             <String fx:value="Item 1" />

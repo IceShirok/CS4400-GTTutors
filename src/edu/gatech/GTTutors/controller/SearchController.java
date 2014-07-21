@@ -1,10 +1,49 @@
 package edu.gatech.GTTutors.controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import edu.gatech.GTTutors.main.DatabaseController;
+import edu.gatech.GTTutors.main.GTTutorsLaunch;
+import edu.gatech.GTTutors.model.SearchPOJO;
 
 public class SearchController extends AbstractController {
+    
+    @FXML
+    private Label message;
+    
+    @FXML
+    private ChoiceBox<String> courses;
+    
+    @FXML
+    private TableView<SearchPOJO> searchTable;
+    
+    @FXML
+    private TableColumn<SearchPOJO, String> name;
+    @FXML
+    private TableColumn<SearchPOJO, String> email;
+    @FXML
+    private TableColumn<SearchPOJO, Double> avgProf;
+    @FXML
+    private TableColumn<SearchPOJO, Integer> numProf;
+    @FXML
+    private TableColumn<SearchPOJO, Double> avgStudent;
+    @FXML
+    private TableColumn<SearchPOJO, Integer> numStudent;
     
     @FXML
     private CheckBox m9;
@@ -109,15 +148,73 @@ public class SearchController extends AbstractController {
         thursdays = new CheckBox[]{r9, r10, r11, r12, r13, r14, r15, r16};
         fridays = new CheckBox[]{f9, f10, f11, f12, f13, f14, f15, f16};
     }
+    
+    private String parseTime(String stime) {
+        int time = Integer.parseInt(stime);
+        if(time < 12) {
+            return "\""+time+"AM"+"\"";
+        } else if(time == 12) {
+            return "\""+time+"PM"+"\"";
+        } else {
+            return "\""+(time-12)+"PM"+"\"";
+        }
+    }
+    
+    private String processInClause(Set<String> set) {
+        String aString = "(";
+        for(String item : set) {
+            aString += item + ",";
+        }
+        aString = aString.substring(0, aString.length()-1);
+        aString += ")";
+        return aString;
+    }
 
     @Override
     protected void submit(ActionEvent event) {
-        // TODO: display stuff on table
+        if(courses.getValue() == null) {
+            return;
+        }
+        String[] courseSplit = courses.getValue().split(" ");
+        
+        Set<String> timesSet = new LinkedHashSet<>();
+        Set<String> daysSet = new LinkedHashSet<>();
+        
         for(CheckBox box : mondays) {
             if(box.isSelected()) {
-                System.out.println(box.getText());
+                daysSet.add("\"Monday\"");
+                timesSet.add(parseTime(box.getId().substring(1)));
             }
         }
+        for(CheckBox box : tuesdays) {
+            if(box.isSelected()) {
+                daysSet.add("\"Tuesday\"");
+                timesSet.add(parseTime(box.getId().substring(1)));
+            }
+        }
+        for(CheckBox box : wednesdays) {
+            if(box.isSelected()) {
+                daysSet.add("\"Wednesday\"");
+                timesSet.add(parseTime(box.getId().substring(1)));
+            }
+        }
+        for(CheckBox box : thursdays) {
+            if(box.isSelected()) {
+                daysSet.add("\"Thursday\"");
+                timesSet.add(parseTime(box.getId().substring(1)));
+            }
+        }
+        for(CheckBox box : fridays) {
+            if(box.isSelected()) {
+                daysSet.add("\"Friday\"");
+                timesSet.add(parseTime(box.getId().substring(1)));
+            }
+        }
+        
+        String days = processInClause(daysSet);
+        String times = processInClause(timesSet);
+        
+        populateResults(courseSplit[0], courseSplit[1], times, days);
     }
 
     @Override
@@ -127,7 +224,83 @@ public class SearchController extends AbstractController {
 
     @Override
     protected void populate(ActionEvent event) {
-        // TODO: populate with courses that have available tutors
+        Connection connect = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connect = (Connection) DriverManager.getConnection(DatabaseController.DB_URL + DatabaseController.GROUP,
+                                                                DatabaseController.GROUP,
+                                                                DatabaseController.PW);
+            Statement stmt = connect.createStatement();
+            
+            String strSelect = "SELECT DISTINCT School, Number FROM AvailableTimeSlots"
+                    + " WHERE Semester=\"" + GTTutorsLaunch.log.getCurrentSemester() + "\";";
+            System.out.println(strSelect);
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ObservableList<String> row = FXCollections.observableArrayList();
+            while(rset.next()) {
+                row.add(rset.getString("School") + " " + rset.getString("Number"));
+            }
+            courses.setItems(row);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connect.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    private void populateResults(String school, String number, String times, String days) {
+        name.setCellValueFactory(new PropertyValueFactory<SearchPOJO,String>("name"));
+        email.setCellValueFactory(new PropertyValueFactory<SearchPOJO,String>("email"));
+        avgProf.setCellValueFactory(new PropertyValueFactory<SearchPOJO,Double>("avgProf"));
+        numProf.setCellValueFactory(new PropertyValueFactory<SearchPOJO,Integer>("numProf"));
+        avgStudent.setCellValueFactory(new PropertyValueFactory<SearchPOJO,Double>("avgStudent"));
+        numStudent.setCellValueFactory(new PropertyValueFactory<SearchPOJO,Integer>("numStudent"));
+        
+        Connection connect = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connect = (Connection) DriverManager.getConnection(DatabaseController.DB_URL + DatabaseController.GROUP,
+                                                                DatabaseController.GROUP,
+                                                                DatabaseController.PW);
+            Statement stmt = connect.createStatement();
+            
+            String strSelect = "SELECT T.Name, T.Email, T.AvgProf, T.NumProf, T.AvgProf, T.NumProf"
+                + " FROM TutorRatings T NATURAL JOIN AvailableTimeSlots"
+                + " WHERE Semester=\"" + GTTutorsLaunch.log.getCurrentSemester() + "\""
+                    + " AND School=\"" + school + "\""
+                    + " AND Number=\"" + number + "\""
+                    + " AND Weekday IN " + days
+                    + " AND Time IN " + times
+                + " GROUP BY T.GTID"
+                + " ORDER BY T.AvgStudent ASC, T.GTID ASC;";
+            System.out.println(strSelect);
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ObservableList<SearchPOJO> row = FXCollections.observableArrayList();
+            while(rset.next()) {
+                String name = (rset.getString("Name"));
+                String email = (rset.getString("Email"));
+                double avgProf = (rset.getDouble("AvgProf"));
+                int numProf = (rset.getInt("NumProf"));
+                double avgStudent = (rset.getDouble("AvgProf"));
+                int numStudent = (rset.getInt("NumProf"));
+                row.add(new SearchPOJO(name, email, avgProf, numProf, avgStudent, numStudent));
+            }
+            searchTable.setItems(row);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connect.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

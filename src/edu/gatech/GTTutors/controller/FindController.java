@@ -62,7 +62,6 @@ public class FindController extends AbstractController {
     
     private void populateResults() {
         
-        // TODO: implement
         day.setCellValueFactory(new PropertyValueFactory<FindPOJO,String>("day"));
         time.setCellValueFactory(new PropertyValueFactory<FindPOJO,String>("time"));
         name.setCellValueFactory(new PropertyValueFactory<FindPOJO,String>("name"));
@@ -78,7 +77,7 @@ public class FindController extends AbstractController {
             Statement stmt = connect.createStatement();
 
             String strSelect = "SELECT Weekday, Time, Name, Email, School, Number"
-                    + " FROM HiringTutorInfo WHERE TGTID=\"" + GTTutorsLaunch.log.getUsername() + "\""
+                    + " FROM TutorScheduleInfo WHERE TGTID=\"" + GTTutorsLaunch.log.getUsername() + "\""
                     + " AND Semester=\"" + GTTutorsLaunch.log.getCurrentSemester() + "\";";
             System.out.println(strSelect);
             
