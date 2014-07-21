@@ -71,8 +71,7 @@ public class MenuController extends AbstractController {
         setLoginDisplay(GTTutorsLaunch.log.getUsername());
         
         for(GridPane row : rows) {
-            row.setVisible(true);
-            //row.setVisible((row.getId().toLowerCase()).contains(LoginStore.getUserType().toLowerCase()));
+            row.setVisible((row.getId().toLowerCase()).contains(GTTutorsLaunch.log.getUserType().toLowerCase()));
         }
     }
 
