@@ -76,7 +76,7 @@ public class RateController extends AbstractController {
             courses.setItems(row);
         } catch (Exception e) {
             e.printStackTrace();
-            message.setText("GTID is not valid or you have already recommended this student.");
+            message.setText("You have never had this tutor or is an invalid tutor.");
         } finally {
             try {
                 connect.close();
