@@ -67,7 +67,6 @@ public class SummaryOneController extends AbstractController {
     }
     
     private void populateResults(String semesters) {
-        // TODO: implement
         course.setCellValueFactory(new PropertyValueFactory<Sum1POJO,String>("course"));
         semester.setCellValueFactory(new PropertyValueFactory<Sum1POJO,String>("semester"));
         numStudents.setCellValueFactory(new PropertyValueFactory<Sum1POJO,Integer>("numStudents"));

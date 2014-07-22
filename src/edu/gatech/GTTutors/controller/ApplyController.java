@@ -1,13 +1,31 @@
 package edu.gatech.GTTutors.controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
+import edu.gatech.GTTutors.main.GTTutorsLaunch;
+import edu.gatech.GTTutors.model.ApplyPOJO;
+import edu.gatech.GTTutors.model.Sum1POJO;
 
 public class ApplyController extends AbstractController {
+    
+    @FXML
+    private Text message;
     
     @FXML
     private CheckBox m9;
@@ -103,6 +121,22 @@ public class ApplyController extends AbstractController {
     private CheckBox f16;
     @FXML
     private CheckBox[] fridays;
+
+    @FXML
+    private TextField gpa;
+    @FXML
+    private TextField phone;
+    
+    @FXML
+    private TableView<ApplyPOJO> applyTable;
+    @FXML
+    private TableColumn<ApplyPOJO, String> school;
+    @FXML
+    private TableColumn<ApplyPOJO, String> number;
+    @FXML
+    private TableColumn<ApplyPOJO, CheckBox> gta;
+    @FXML
+    private TableColumn<ApplyPOJO, CheckBox> select;
     
     @FXML
     public void initialize() {
@@ -115,51 +149,35 @@ public class ApplyController extends AbstractController {
 
     @Override
     protected void submit(ActionEvent event) {
-        /*
-        if(courses.getValue() == null) {
-            return;
-        }
-        String[] courseSplit = courses.getValue().split(" ");
-        */
-        
-        Set<String> timesSet = new LinkedHashSet<>();
-        Set<String> daysSet = new LinkedHashSet<>();
+        Set<String> times = new LinkedHashSet<>();
         
         for(CheckBox box : mondays) {
             if(box.isSelected()) {
-                daysSet.add("\"Monday\"");
-                timesSet.add(parseTime(box.getId().substring(1)));
+                times.add("Monday "+parseTime(box.getId().substring(1)));
             }
         }
         for(CheckBox box : tuesdays) {
             if(box.isSelected()) {
-                daysSet.add("\"Tuesday\"");
-                timesSet.add(parseTime(box.getId().substring(1)));
+                times.add("Tuesday "+parseTime(box.getId().substring(1)));
             }
         }
         for(CheckBox box : wednesdays) {
             if(box.isSelected()) {
-                daysSet.add("\"Wednesday\"");
-                timesSet.add(parseTime(box.getId().substring(1)));
+                times.add("Wednesday "+parseTime(box.getId().substring(1)));
             }
         }
         for(CheckBox box : thursdays) {
             if(box.isSelected()) {
-                daysSet.add("\"Thursday\"");
-                timesSet.add(parseTime(box.getId().substring(1)));
+                times.add("Thursday "+parseTime(box.getId().substring(1)));
             }
         }
         for(CheckBox box : fridays) {
             if(box.isSelected()) {
-                daysSet.add("\"Friday\"");
-                timesSet.add(parseTime(box.getId().substring(1)));
+                times.add("Friday "+parseTime(box.getId().substring(1)));
             }
         }
         
-        String days = processInClause(daysSet);
-        String times = processInClause(timesSet);
-        
-        //populateResults(courseSplit[0], courseSplit[1], times, days);
+        submitResults(times);
     }
     
     @Override
@@ -169,8 +187,108 @@ public class ApplyController extends AbstractController {
 
     @Override
     protected void populate(ActionEvent event) {
-        // TODO Auto-generated method stub
+        school.setCellValueFactory(new PropertyValueFactory<ApplyPOJO,String>("school"));
+        number.setCellValueFactory(new PropertyValueFactory<ApplyPOJO,String>("number"));
+        gta.setCellValueFactory(new PropertyValueFactory<ApplyPOJO,CheckBox>("gta"));
+        select.setCellValueFactory(new PropertyValueFactory<ApplyPOJO,CheckBox>("select"));
         
+        Connection connect = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connect = (Connection) DriverManager.getConnection(GTTutorsLaunch.DB_URL + GTTutorsLaunch.GROUP,
+                                                                GTTutorsLaunch.GROUP,
+                                                                GTTutorsLaunch.PW);
+            Statement stmt = connect.createStatement();
+            
+            String query = "SELECT * FROM Course;";
+            System.out.println(query);
+            ResultSet rset = stmt.executeQuery(query);
+            
+            ObservableList<ApplyPOJO> rows = FXCollections.observableArrayList();
+            while(rset.next()) {
+                rows.add(new ApplyPOJO(rset.getString("School"), rset.getString("Number"), new CheckBox(), new CheckBox()));               
+            }
+            applyTable.setItems(rows);
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(connect != null)
+                    connect.close();
+            } catch(SQLException e) {}
+        }
+    }
+    
+    private void submitResults(Set<String> times) {
+        // TODO: implement to submit
+        Connection connect = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connect = (Connection) DriverManager.getConnection(GTTutorsLaunch.DB_URL + GTTutorsLaunch.GROUP,
+                                                                GTTutorsLaunch.GROUP,
+                                                                GTTutorsLaunch.PW);
+            Statement stmt = connect.createStatement();
+            
+            String query = "SELECT TGTID FROM Recommends WHERE TGTID=\""+GTTutorsLaunch.log.getUsername()+"\";";
+            System.out.println(query);
+            
+            ResultSet rset = stmt.executeQuery(query);
+            if(!rset.next()) {
+                message.setText("You must have at least 1 recommendation from a professor!");
+                return;
+            }
+            
+            // inserting tutor information
+            query = "INSERT IGNORE INTO Tutor VALUES (\""+GTTutorsLaunch.log.getUsername()+"\","
+                    +"\""+phone.getText()+"\","
+                    +gpa.getText()
+                    +");";
+            System.out.println(query);
+            //stmt.executeUpdate(query);
+
+            
+            // iterating through courses
+            ObservableList<ApplyPOJO> courses = applyTable.getItems();
+            
+            query = "SELECT GTID FROM Graduate WHERE GTID=\""+GTTutorsLaunch.log.getUsername()+"\";";
+            System.out.println(query);
+            rset = stmt.executeQuery(query);
+            boolean isGrad = rset.next();
+            
+            for(ApplyPOJO course : courses) {
+                if(course.getGta().isSelected() && !isGrad) {
+                    message.setText("You must be a graduate in order to be a graduate TA!");
+                } else {
+                    int isGta = course.getGta().isSelected() ? 1 : 0;
+                    query = "INSERT IGNORE INTO Tutors VALUES (\""+GTTutorsLaunch.log.getUsername()+"\","
+                            +"\""+course.getSchool()+"\","
+                            +"\""+course.getNumber()+"\","
+                            +isGta
+                            +");";
+                    System.out.println(query);
+                    //stmt.executeUpdate(query);
+                }
+            }
+            
+            // iterating through times available
+            for(String time : times) {
+                String[] timeSplit = time.split(" ");
+                query = "INSERT IGNORE INTO TimeSlot VALUES (\""+GTTutorsLaunch.log.getUsername()+"\","
+                        +"\""+timeSplit[1]+"\","
+                        +"\""+GTTutorsLaunch.log.getCurrentSemester()+"\","
+                        +"\""+timeSplit[0]+"\""
+                        +");";
+                System.out.println(query);
+                //stmt.executeUpdate(query);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(connect != null)
+                    connect.close();
+            } catch(SQLException e) {}
+        }
     }
 
 }
