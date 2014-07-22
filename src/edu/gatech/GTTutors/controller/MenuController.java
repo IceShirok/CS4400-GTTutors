@@ -75,6 +75,8 @@ public class MenuController extends AbstractController {
             student.setDisable(false);
             menu.getSelectionModel().select(student);
         }
+        
+        find.setVisible(user.equals("Tutor"));
     }
 
 }

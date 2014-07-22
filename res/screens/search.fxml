@@ -37,18 +37,12 @@
   <stylesheets>
     <URL value="@../Login.css" />
   </stylesheets>
-  <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="12">
-    <children>
-      <Button mnemonicParsing="false" onAction="#goBack" text="Back" />
-      <Button fx:id="scheduler" mnemonicParsing="false" onAction="#schedule" text="Schedule a Tutor" />
-    </children>
-  </HBox>
   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="11">
     <children>
       <TableView fx:id="searchTable" prefHeight="150.0" prefWidth="511.0">
         <columns>
-          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="128.0" text="Name" fx:id="name" />
-          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="116.0" text="Email" fx:id="email" />
+          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="60.0" text="Name" fx:id="name" />
+          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="86.0" text="Email" fx:id="email" />
           <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="55.0" text="Weekday" fx:id="day" />
           <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="55.0" text="Time" fx:id="time" />
           <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="66.0" text="Avg. Prof. Rating" fx:id="avgProf" />
@@ -303,4 +297,25 @@
     </children>
   </HBox>
   <Text fx:id="message" text="" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+  <GridPane GridPane.columnIndex="0" GridPane.rowIndex="12">
+    <children>
+      <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <children>
+          <Button mnemonicParsing="false" onAction="#goBack" text="Back" />
+        </children>
+      </HBox>
+      <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <children>
+          <Button fx:id="scheduler" mnemonicParsing="false" onAction="#schedule" text="Schedule a Tutor" />
+        </children>
+      </HBox>
+    </children>
+    <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+  </GridPane>
 </GridPane>

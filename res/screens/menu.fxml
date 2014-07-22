@@ -28,7 +28,7 @@
   <stylesheets>
     <URL value="@../Login.css" />
   </stylesheets>
-  <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+  <HBox alignment="BOTTOM_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
     <children>
       <Button mnemonicParsing="false" onAction="#goBack" text="Logout" />
     </children>
@@ -47,7 +47,7 @@
                     </VBox.margin>
                   </Button>
                   <Button fx:id="rate" maxWidth="250.0" minWidth="250.0" mnemonicParsing="false" onAction="#submit" prefWidth="250.0" text="Rate a Tutor" VBox.margin="$x1" />
-                  <Button fx:id="apply" maxWidth="250.0" minWidth="250.0" mnemonicParsing="false" onAction="#submit" prefWidth="250.0" text="Apply" VBox.margin="$x1" />
+                  <Button fx:id="apply" maxWidth="250.0" minWidth="250.0" mnemonicParsing="false" onAction="#submit" prefWidth="250.0" text="Apply to Become a Tutor" VBox.margin="$x1" />
                   <Button fx:id="find" maxWidth="250.0" minWidth="250.0" mnemonicParsing="false" onAction="#submit" prefWidth="250.0" text="Look Up Schedule" VBox.margin="$x1" />
                 </children>
               </VBox>

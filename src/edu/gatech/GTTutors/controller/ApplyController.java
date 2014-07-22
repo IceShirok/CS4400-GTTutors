@@ -218,6 +218,10 @@ public class ApplyController extends AbstractController {
                 times.add("Friday "+parseTime(box.getId().substring(1)));
             }
         }
+        if(times.isEmpty()) {
+            message.setText("Fill in all entries.");
+            return;
+        }
         
         
         Connection connect = null;
@@ -243,7 +247,7 @@ public class ApplyController extends AbstractController {
                     +gpa.getText()
                     +");";
             System.out.println(query);
-            //stmt.executeUpdate(query);
+            stmt.executeUpdate(query);
 
             
             // iterating through courses
@@ -266,7 +270,7 @@ public class ApplyController extends AbstractController {
                                 +isGta
                                 +");";
                         System.out.println(query);
-                        //stmt.executeUpdate(query);
+                        stmt.executeUpdate(query);
                     }
                 }
             }
@@ -281,7 +285,7 @@ public class ApplyController extends AbstractController {
                         +"\""+timeSplit[0]+"\""
                         +");";
                 System.out.println(query);
-                //stmt.executeUpdate(query);
+                stmt.executeUpdate(query);
             }
         } catch(Exception e) {
             e.printStackTrace();

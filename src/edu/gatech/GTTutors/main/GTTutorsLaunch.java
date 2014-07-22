@@ -15,7 +15,7 @@ public class GTTutorsLaunch extends Application {
     public static final String DB_URL = "jdbc:mysql://academic-mysql.cc.gatech.edu/";
     public static final String GROUP = "cs4400_Group_30";
     public static final String PW = "ArdHSY4u";
-    public static final String[] USER_TYPES = {"Student", "Tutor", "Professor", "Administrator"};
+    public static final String[] USER_TYPES = {"Tutor", "Student", "Professor", "Administrator"};
     
     public final static String SCREEN_URL = "/screens/";
     public final static String FXML_EXT = ".fxml";

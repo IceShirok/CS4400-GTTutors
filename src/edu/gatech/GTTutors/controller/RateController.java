@@ -63,7 +63,7 @@ public class RateController extends AbstractController {
                                                                 GTTutorsLaunch.PW);
             Statement stmt = connect.createStatement();
             
-            String strSelect = "SELECT School, Number FROM Hires"
+            String strSelect = "SELECT DISTINCT School, Number FROM Hires"
                                 + " WHERE GTID=\"" + GTTutorsLaunch.log.getUsername() + "\""
                                 + " AND Semester=\"" + GTTutorsLaunch.log.getCurrentSemester() + "\";";
             System.out.println(strSelect);

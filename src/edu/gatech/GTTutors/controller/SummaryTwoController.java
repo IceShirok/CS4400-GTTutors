@@ -137,8 +137,12 @@ public class SummaryTwoController extends AbstractController {
             double ntaSumAvg = 0, taSumAvg = 0, taCount = 0, ntaCount = 0;
             for(Sum2POJO p : rows) {
             	if(p.getSemester().equals("Avg")) {
-            		p.setAvgNot(ntaSumAvg / ntaCount);
-            		p.setAvgTA(taSumAvg / taCount);
+            	    if(ntaCount != 0) {
+            	        p.setAvgNot(ntaSumAvg / ntaCount);
+            	    }
+                    if(taCount != 0) {
+                        p.setAvgTA(taSumAvg / taCount);
+                    }
             		ntaCount = taCount = ntaSumAvg = taSumAvg = 0;
             	} else {
             		ntaSumAvg += p.getAvgNot();

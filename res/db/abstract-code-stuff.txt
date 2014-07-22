@@ -1,0 +1,164 @@
+=======================
+= ABSTRACT CODE STUFF =
+=======================
+
+===== Task: Login =====
+
+// Get login info from user
+$gtid = read("GTID")
+$password = read("Password")
+
+// Validate login info and redirect based on user type
+$isValid = SELECT GTID FROM User WHERE GTID=$gtid AND password=$password;
+if ($isValid==null) {
+    error("Invalid username or password. Try again.")
+    return to [Login Form]
+} else {
+    if (EXISTS(SELECT GTID FROM Administrator WHERE GTID=$gtid)) {
+        return [Main Page for Admin]
+    } else if (EXISTS(SELECT GTID FROM Professor WHERE GTID=$gtid)) {
+        return [Main Page for Professor]
+    } else if (EXISTS(SELECT GTID FROM Tutor WHERE GTID=$gtid)) {
+        return [Main Page for Tutor]
+    } else {
+        return [Main Page for Student]
+    }
+}
+
+===== Task: Search Tutor =====
+
+// Get tutor search information.
+$school = read("School")
+$number = read("Number")
+$listOfTimes = read("Availability")
+
+// Get the results of available tutors from the search
+SELECT T.Name, T.Email, AVG(Rec.Rating), COUNT(Rec.PGTID),
+        AVG(Rates.Rating), COUNT(Rates.UGTID)
+    FROM (Tutor T LEFT OUTER JOIN Recommends Rec ON T.GTID=Rec.GTID)
+        LEFT OUTER JOIN Rates ON Rates.GTID=Rec.GTID
+    WHERE Rates.School=$school AND Rates.Number=$number
+    GROUP BY T.Name, T.Email;
+
+===== Task: Schedule Tutor =====
+
+// Display tutors for a certain class
+SELECT T.Name, T.Email, TS.Day, TS.Time
+    FROM Tutor T INNER JOIN TimeSlot TS
+    ON T.GTID = TS.GTID
+    WHERE Tutor.GTID IN (
+        SELECT Tutor.GTID
+        FROM Tutor
+        WHERE Course.School=$Course
+            AND Course.Number=$Number
+    )
+
+// After selecting a tutor, store hiring into DB
+INSERT INTO Hires VALUES (
+    $myGtid,
+    $school,
+    $number,
+    $time,
+    $semester,
+    $weekday
+)
+
+===== Task: Evaluate Tutor =====
+
+// Get tutor evaluation info
+$school = read("School")
+$number = read("Number")
+$tutorName = read("Tutor Name")
+$desc = read("Descriptive Evaluation")
+$num = read("Numeric Evaluation")
+
+$SEMESTER = getCurrentSemester()
+
+$tutorGtid = SELECT GTID FROM TutorComplete WHERE Name=$tutorName
+
+// Insert the tutor evaluation into DB
+INSERT INTO Rates (
+    $myGtid,
+    $tutorGtid,
+    $school,
+    $number,
+    $SEMESTER,
+    $desc,
+    $num
+)
+
+===== Task: Apply as Tutor =====
+
+// Get tutor application
+$gtid = read("GTID")
+$name = read("Name")
+$email = read("Email")
+$phone = read("Telephone")
+$gpa = read("GPA")
+$isGrad = read("isGrad")
+
+$listOfCourses = read("Courses for Tutoring")
+$listOfTimes = read("Available Days/Times")
+
+$SEMESTER = getCurrentSemester()
+
+// add new item to Tutors
+for ($school, $number, $isGTA in $listOfCourses) {
+    INSERT INTO Tutors VALUES ($gtid, $school, $number, $isGTA)
+}
+
+// add time slots for the tutor
+for ($time, $weekday in $listOfTimes) {
+    INSERT INTO TimeSlot VALUES ($gtid, $time, $SEMESTER, $weekday)
+}
+
+===== Task: Display Tutor Schedule =====
+
+// Get GTID
+$myGtid = read("GTID")
+
+$SEMESTER = getCurrentSemester()
+
+// Display tutor info based on GTID
+SELECT TS.Day, TS.Time, T.Name, T.Email, H.School, H.Number
+    FROM (TimeSlot TS INNER JOIN Tutor T ON TS.GTID=T.GTID)
+        INNER JOIN Hires H ON TS.Time=H.Time,
+            TS.Semester=H.Semester, TS.Weekday=H.Weekday
+    WHERE TS.Semester=$SEMESTER
+        AND EXISTS ( SELECT * FROM Tutor WHERE GTID=$gtid )
+
+
+===== Task: Professor Recommendation =====
+
+// Get tutor recommendation info
+$tutorGtid = read("Tutor GTID")
+$desc = read("Descriptive Evaluation")
+$num = read("Numeric Evaluation")
+
+// Insert tutor recommendation into DB
+INSERT INTO Recommends (
+    $myGtid,
+    $tutorGtid,
+    $desc,
+    $num
+)
+
+===== Task: View Summary 1 =====
+
+$semesters = read("Semesters")
+SELECT H.School, H.Number, SUM(H.GTID), SUM(T.GTID)
+    FROM Course C INNER JOIN Hires H
+        ON C.School=H.School, C.Number=H.Number
+    WHERE H.Semester IN $semesters
+    GROUP BY H.School, H.Number, H.Semester
+
+;; TODO
+
+===== Task: View Summary 2 =====
+
+$semesters = read("Semesters")
+SELECT R.School, R.Number, R.Semester, COUNT(G.GTID),
+        AVG(G.Rating), COUNT(N.GTID), AVG(N.Rating)
+    FROM GTARatings G INNER JOIN nonGTARatings N
+    ON G.School = N.School, G.Number = N.Number AS R
+    GROUP BY R.School, R.Number, H.Semester
