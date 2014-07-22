@@ -45,6 +45,25 @@ INSERT INTO Rates VALUES ("700000007", "700000016", "CS", "1332", "Fall", "This 
 
 /* ===== APPLY SCREEN ===== */
 
+/* gets all courses */
+SELECT * FROM Course;
+
+/* insert tutor as tutor candidate, with recommendation validation */
+SELECT TGTID FROM Recommends WHERE TGTID="700000015";
+INSERT IGNORE INTO Tutor VALUES ("700000015","6786786789",3.5);
+
+/* insert all courses that tutor can tutor for, with gta validation */
+SELECT GTID FROM Graduate WHERE GTID="700000015";
+INSERT IGNORE INTO Tutors VALUES ("700000015","CS","1331",0);
+INSERT IGNORE INTO Tutors VALUES ("700000015","CS","2110",0);
+
+/* insert all courses into timeslots */
+INSERT IGNORE INTO TimeSlot VALUES ("700000015","2PM","Summer","Monday");
+INSERT IGNORE INTO TimeSlot VALUES ("700000015","2PM","Summer","Tuesday");
+INSERT IGNORE INTO TimeSlot VALUES ("700000015","2PM","Summer","Wednesday");
+INSERT IGNORE INTO TimeSlot VALUES ("700000015","2PM","Summer","Thursday");
+INSERT IGNORE INTO TimeSlot VALUES ("700000015","2PM","Summer","Friday");
+
 
 /* ===== FIND SCREEN ===== */
 SELECT Weekday, Time, Name, Email, School, Number
@@ -85,7 +104,7 @@ select R.School, R.Number, R.Semester,
 
 
 /* ===== VIEWS ===== */
-CREATE VIEW TutorScheduleInfo AS (
+CREATE OR REPLACE VIEW TutorScheduleInfo AS (
 	SELECT T.GTID AS TGTID,
 	H.GTID AS UGTID, S.Email, S.Name,
 	T.School, T.Number,
@@ -95,7 +114,7 @@ CREATE VIEW TutorScheduleInfo AS (
 	INNER JOIN Student S ON H.GTID=S.GTID
 );
 
-CREATE VIEW TutorComplete AS (
+CREATE OR REPLACE VIEW TutorComplete AS (
     SELECT * FROM User NATURAL JOIN Student NATURAL JOIN Tutor
 );
 
@@ -103,14 +122,14 @@ CREATE OR REPLACE VIEW TimeSlotComplete AS (
     SELECT * FROM TutorComplete TC NATURAL JOIN TimeSlot TS
 );
 
-CREATE VIEW AvailableTimeSlots AS (
+CREATE OR REPLACE VIEW AvailableTimeSlots AS (
 	SELECT DISTINCT T.GTID, T.Name, T.Email, T.Time, T.Semester, T.Weekday
 		FROM TimeSlotComplete T LEFT OUTER JOIN Hires H
 		ON T.Time=H.Time AND T.Semester=H.Semester AND T.Weekday=H.Weekday
 		WHERE H.GTID IS NULL
 );
 
-CREATE VIEW TutorRatings AS (
+CREATE OR REPLACE VIEW TutorRatings AS (
 	SELECT T.GTID, T.Name, T.Email, AVG(DISTINCT P.Rating) AvgProf, COUNT(DISTINCT P.PGTID) NumProf,
 			AVG(DISTINCT S.Rating) AvgStudent, COUNT(DISTINCT S.UGTID) NumStudent
 		FROM AvailableTimeSlots T INNER JOIN Recommends P

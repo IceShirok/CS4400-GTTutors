@@ -20,7 +20,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import edu.gatech.GTTutors.main.GTTutorsLaunch;
 import edu.gatech.GTTutors.model.ApplyPOJO;
-import edu.gatech.GTTutors.model.Sum1POJO;
 
 public class ApplyController extends AbstractController {
     
@@ -149,35 +148,7 @@ public class ApplyController extends AbstractController {
 
     @Override
     protected void submit(ActionEvent event) {
-        Set<String> times = new LinkedHashSet<>();
-        
-        for(CheckBox box : mondays) {
-            if(box.isSelected()) {
-                times.add("Monday "+parseTime(box.getId().substring(1)));
-            }
-        }
-        for(CheckBox box : tuesdays) {
-            if(box.isSelected()) {
-                times.add("Tuesday "+parseTime(box.getId().substring(1)));
-            }
-        }
-        for(CheckBox box : wednesdays) {
-            if(box.isSelected()) {
-                times.add("Wednesday "+parseTime(box.getId().substring(1)));
-            }
-        }
-        for(CheckBox box : thursdays) {
-            if(box.isSelected()) {
-                times.add("Thursday "+parseTime(box.getId().substring(1)));
-            }
-        }
-        for(CheckBox box : fridays) {
-            if(box.isSelected()) {
-                times.add("Friday "+parseTime(box.getId().substring(1)));
-            }
-        }
-        
-        submitResults(times);
+        submitResults();
     }
     
     @Override
@@ -219,8 +190,36 @@ public class ApplyController extends AbstractController {
         }
     }
     
-    private void submitResults(Set<String> times) {
-        // TODO: implement to submit
+    private void submitResults() {
+        Set<String> times = new LinkedHashSet<>();
+        
+        for(CheckBox box : mondays) {
+            if(box.isSelected()) {
+                times.add("Monday "+parseTime(box.getId().substring(1)));
+            }
+        }
+        for(CheckBox box : tuesdays) {
+            if(box.isSelected()) {
+                times.add("Tuesday "+parseTime(box.getId().substring(1)));
+            }
+        }
+        for(CheckBox box : wednesdays) {
+            if(box.isSelected()) {
+                times.add("Wednesday "+parseTime(box.getId().substring(1)));
+            }
+        }
+        for(CheckBox box : thursdays) {
+            if(box.isSelected()) {
+                times.add("Thursday "+parseTime(box.getId().substring(1)));
+            }
+        }
+        for(CheckBox box : fridays) {
+            if(box.isSelected()) {
+                times.add("Friday "+parseTime(box.getId().substring(1)));
+            }
+        }
+        
+        
         Connection connect = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -256,25 +255,28 @@ public class ApplyController extends AbstractController {
             boolean isGrad = rset.next();
             
             for(ApplyPOJO course : courses) {
-                if(course.getGta().isSelected() && !isGrad) {
-                    message.setText("You must be a graduate in order to be a graduate TA!");
-                } else {
-                    int isGta = course.getGta().isSelected() ? 1 : 0;
-                    query = "INSERT IGNORE INTO Tutors VALUES (\""+GTTutorsLaunch.log.getUsername()+"\","
-                            +"\""+course.getSchool()+"\","
-                            +"\""+course.getNumber()+"\","
-                            +isGta
-                            +");";
-                    System.out.println(query);
-                    //stmt.executeUpdate(query);
+                if(course.getSelect().isSelected()) {
+                    if(course.getGta().isSelected() && !isGrad) {
+                        message.setText("You must be a graduate in order to be a graduate TA!");
+                    } else {
+                        int isGta = course.getGta().isSelected() ? 1 : 0;
+                        query = "INSERT IGNORE INTO Tutors VALUES (\""+GTTutorsLaunch.log.getUsername()+"\","
+                                +"\""+course.getSchool()+"\","
+                                +"\""+course.getNumber()+"\","
+                                +isGta
+                                +");";
+                        System.out.println(query);
+                        //stmt.executeUpdate(query);
+                    }
                 }
             }
+            
             
             // iterating through times available
             for(String time : times) {
                 String[] timeSplit = time.split(" ");
                 query = "INSERT IGNORE INTO TimeSlot VALUES (\""+GTTutorsLaunch.log.getUsername()+"\","
-                        +"\""+timeSplit[1]+"\","
+                        +timeSplit[1]+","
                         +"\""+GTTutorsLaunch.log.getCurrentSemester()+"\","
                         +"\""+timeSplit[0]+"\""
                         +");";
