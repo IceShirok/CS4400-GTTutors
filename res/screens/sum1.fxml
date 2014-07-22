@@ -23,7 +23,7 @@
     <RowConstraints maxHeight="16.0" minHeight="10.0" prefHeight="16.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="16.0" minHeight="10.0" prefHeight="16.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="250.0" minHeight="10.0" percentHeight="0.0" prefHeight="250.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
   </rowConstraints>
   <stylesheets>
@@ -32,18 +32,6 @@
   <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="5">
     <children>
       <Button mnemonicParsing="false" onAction="#goBack" text="Back" />
-    </children>
-  </HBox>
-  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
-    <children>
-      <TableView fx:id="sum1Table" prefHeight="150.0" prefWidth="511.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Course" fx:id="course" />
-          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="108.0" text="Semester" fx:id="semester" />
-          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="126.0" text="# Students" fx:id="numStudents" />
-          <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="109.0" text="# Tutors" fx:id="numTutors" />
-        </columns>
-      </TableView>
     </children>
   </HBox>
   <BorderPane prefHeight="50.0" prefWidth="511.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
@@ -66,4 +54,12 @@
   <Text id="title" text="Summary 1" GridPane.columnIndex="0" GridPane.rowIndex="0" />
   <Separator prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2" />
   <Label text="See a summary of the number of tutor and number of student who used tutors in each class." wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+  <TableView fx:id="sum1Table" prefHeight="250.0" prefWidth="511.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
+    <columns>
+      <TableColumn prefWidth="75.0" text="Course" fx:id="course" />
+      <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="108.0" text="Semester" fx:id="semester" />
+      <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="126.0" text="# Students" fx:id="numStudents" />
+      <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="109.0" text="# Tutors" fx:id="numTutors" />
+    </columns>
+  </TableView>
 </GridPane>
