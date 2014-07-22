@@ -1,8 +1,14 @@
 package edu.gatech.GTTutors.controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -10,6 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import edu.gatech.GTTutors.main.DatabaseController;
+import edu.gatech.GTTutors.model.Sum1POJO;
 import edu.gatech.GTTutors.model.Sum2POJO;
 
 public class SummaryTwoController extends AbstractController {
@@ -75,38 +83,74 @@ public class SummaryTwoController extends AbstractController {
         numNot.setCellValueFactory(new PropertyValueFactory<Sum2POJO,Integer>("numNot"));
         avgNot.setCellValueFactory(new PropertyValueFactory<Sum2POJO,Double>("avgNot"));
         
-        // TODO: make this more efficient?
-        // don't think you can get around copy+paste this kind of stuff...
-        /*
+        String query1 = "select R.School, R.Number, R.Semester, count(T.GTA) as nonTA, avg(R.Rating) as avgRating" +
+        				" from Rates R left outer join Tutors T on T.GTID=R.TGTID and T.School=R.School and T.Number=R.Number" +
+        				" where T.GTA=0" +
+        				" group by R.School, R.Number, R.Semester" +
+        				" order by R.School ASC";
+        String query2 = "select R.School, R.Number, R.Semester, count(T.GTA) as TA, avg(R.Rating) as avgRating" +
+						" from Rates R left outer join Tutors T on T.GTID=R.TGTID and T.School=R.School and T.Number=R.Number" +
+						" where T.GTA=1" +
+						" group by R.School, R.Number, R.Semester" +
+						" order by R.School ASC";
+
         Connection connect = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            connect = DriverManager.getConnection("");
+        	Class.forName("com.mysql.jdbc.Driver");
+            connect = (Connection) DriverManager.getConnection(DatabaseController.DB_URL + DatabaseController.GROUP,
+                                                                DatabaseController.GROUP,
+                                                                DatabaseController.PW);            
+            Statement stmt1 = connect.createStatement();
+            Statement stmt2 = connect.createStatement();
+            ResultSet rset1 = stmt1.executeQuery(query1);
+            ResultSet rset2 = stmt2.executeQuery(query2);
             
-            Statement stmt = connect.createStatement();
-            
-            stmt.executeUpdate("DROP VIEW IF EXISTS CurrentYear");
-            stmt.executeUpdate("DROP VIEW IF EXISTS PreviousYear");
-            stmt.executeUpdate("DROP VIEW IF EXISTS RetroactiveYears");
-            stmt.executeUpdate("DROP VIEW IF EXISTS ProactiveYears");
-            stmt.executeUpdate("DROP VIEW IF EXISTS SgaAllocationResults");
-            //executeUpdate = update DB
-            //executeQuery = get some results back
-            
-            ResultSet rset = stmt.executeQuery("SELECT * FROM CurrentYear;");
-            
-            
-            ObservableList<Sum2POJO> tableData = FXCollections.observableArrayList();
-            while(rset.next()) {
-                String semester = rset.getString("Semester");
-                //so on, so forth
-                //calculating the averages and stuff goes here too
-                tableData.add(new Sum2POJO("", semester, 0, 0, 0, 0));
+            ObservableList<Sum2POJO> rows = FXCollections.observableArrayList();
+            String last = "";
+            while(rset1.next()) {
+            	String course = rset1.getString("School") + rset1.getString("Number");
+            	if(course.equals(last)) {
+            		course = "";
+            	} else {
+            		last = course;
+            		if(rows.size() > 0) {
+            			rows.add(new Sum2POJO("", "Avg", 0, 0, 0, 0));
+            		}
+            	}
+            	String semester = rset1.getString("Semester");
+            	int nta = rset1.getInt("nonTA");
+            	double avg = rset1.getDouble("avgRating");
+            	rows.add(new Sum2POJO(course, semester, 0, 0, nta, avg));
             }
-            sum2Table.setItems(tableData);
+            rows.add(new Sum2POJO("", "Avg", 0, 0, 0, 0));
+            while(rset2.next()) {
+            	String course = rset2.getString("School") + rset2.getString("Number");
+            	String semester = rset2.getString("Semester");
+            	int ta = rset2.getInt("TA");
+            	double avg = rset2.getDouble("avgRating");
+            	for(Sum2POJO p : rows) {
+            		if(course.equals(p.getCourse()) && semester.equals(p.getSemester())) {
+            			p.setNumTa(ta);
+            			p.setAvgTA(avg);
+            		}
+            	}
+            }
+            double ntaSumAvg = 0, taSumAvg = 0, taCount = 0, ntaCount = 0;
+            for(Sum2POJO p : rows) {
+            	if(p.getSemester().equals("Avg")) {
+            		p.setAvgNot(ntaSumAvg / ntaCount);
+            		p.setAvgTA(taSumAvg / taCount);
+            		ntaCount = taCount = ntaSumAvg = taSumAvg = 0;
+            	} else {
+            		ntaSumAvg += p.getAvgNot();
+            		taSumAvg += p.getAvgTa();
+            		ntaCount += p.getNumNot();
+            		taCount += p.getNumTa();
+            	}
+            }
+           sum2Table.setItems(rows);
         } catch (Exception e) {
-            System.out.println(e);
-            message.setText(e.getMessage() + " Please contact the database admin for help.");
+            e.printStackTrace();
         } finally {
             try {
                 if(connect!=null) {
@@ -116,7 +160,7 @@ public class SummaryTwoController extends AbstractController {
                 message.setText(e.getMessage() + " Please contact the database admin for help.");
             }
         }
-        */
+        
     }
 
 }

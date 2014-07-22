@@ -37,5 +37,22 @@ public class Sum2POJO {
     public double getAvgNot() {
         return avgNot;
     }
-
+    public void setAvgTA(double avg) {
+    	avgTa = avg;
+    }
+    public void setNumTa(int ta) {
+    	numTa = ta;
+    }
+    public void setCourse(String c) {
+    	course = c;
+    }
+    public void setSemester(String s) {
+    	semester = s;
+    }
+    public void setNumNot(int n) {
+    	numNot = n;
+    }
+    public void setAvgNot(double avg) {
+    	avgNot = avg;
+    }
 }
