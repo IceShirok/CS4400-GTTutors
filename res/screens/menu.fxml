@@ -14,7 +14,6 @@
 <GridPane alignment="CENTER" hgap="10.0" styleClass="root" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.gatech.GTTutors.controller.MenuController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
   </columnConstraints>
   <padding>
     <Insets bottom="10.0" left="25.0" right="25.0" top="25.0" />
@@ -23,33 +22,68 @@
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
   </rowConstraints>
   <stylesheets>
     <URL value="@../Login.css" />
   </stylesheets>
-  <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+  <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
     <children>
       <Button mnemonicParsing="false" onAction="#goBack" text="Logout" />
     </children>
   </HBox>
-  <Label fx:id="loginInfo" text="Logged in as:" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-  <GridPane fx:id="student" GridPane.columnIndex="1" GridPane.rowIndex="1">
-    <Button fx:id="search" mnemonicParsing="false" onAction="#submit" text="Search for Tutors" GridPane.columnIndex="0" />
-    <Button fx:id="rate" mnemonicParsing="false" onAction="#submit" text="Rate a Tutor" GridPane.columnIndex="1" />
-  </GridPane>
-  <GridPane fx:id="tutorstudent" GridPane.columnIndex="1" GridPane.rowIndex="2">
-    <Button fx:id="apply" mnemonicParsing="false" onAction="#submit" text="Apply" GridPane.columnIndex="0" />
-    <Button fx:id="find" mnemonicParsing="false" onAction="#submit" text="Look Up Schedule" GridPane.columnIndex="1" />
-  </GridPane>
-  <GridPane fx:id="professor" GridPane.columnIndex="1" GridPane.rowIndex="3">
-    <Button fx:id="recommend" mnemonicParsing="false" onAction="#submit" text="Recommend a Tutor" GridPane.columnIndex="1" />
-  </GridPane>
-  <GridPane fx:id="administrator" GridPane.columnIndex="1" GridPane.rowIndex="4">
-    <Button fx:id="sum1" mnemonicParsing="false" onAction="#submit" text="View Summary 1" GridPane.columnIndex="0" />
-    <Button fx:id="sum2" mnemonicParsing="false" onAction="#submit" text="View Summary 2" GridPane.columnIndex="1" />
-  </GridPane>
+  <Label fx:id="loginInfo" text="Logged in as:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+  <TabPane fx:id="menu" prefHeight="250.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="0" GridPane.rowIndex="1">
+    <tabs>
+      <Tab fx:id="student" text="Student &amp; Tutor">
+        <content>
+          <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <children>
+              <VBox layoutX="125.0" layoutY="57.0" prefHeight="127.0" prefWidth="263.0">
+                <children>
+                  <Button fx:id="search" maxWidth="250.0" minWidth="250.0" mnemonicParsing="false" onAction="#submit" prefWidth="250.0" text="Search and Schedule for Tutors">
+                    <VBox.margin>
+                      <Insets bottom="5.0" top="5.0" fx:id="x1" />
+                    </VBox.margin>
+                  </Button>
+                  <Button fx:id="rate" maxWidth="250.0" minWidth="250.0" mnemonicParsing="false" onAction="#submit" prefWidth="250.0" text="Rate a Tutor" VBox.margin="$x1" />
+                  <Button fx:id="apply" maxWidth="250.0" minWidth="250.0" mnemonicParsing="false" onAction="#submit" prefWidth="250.0" text="Apply" VBox.margin="$x1" />
+                  <Button fx:id="find" maxWidth="250.0" minWidth="250.0" mnemonicParsing="false" onAction="#submit" prefWidth="250.0" text="Look Up Schedule" VBox.margin="$x1" />
+                </children>
+              </VBox>
+              <Label layoutX="20.0" layoutY="14.0" prefHeight="48.0" prefWidth="473.0" text="Students may search and schedule for an available tutor. They may also rate a tutor or apply to become a tutor. Tutors may schedule more timeslots or see their schedule." wrapText="true" />
+            </children>
+          </AnchorPane>
+        </content>
+      </Tab>
+      <Tab fx:id="professor" text="Professor">
+        <content>
+          <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <children>
+              <VBox layoutX="115.0" layoutY="60.0" prefHeight="72.0" prefWidth="270.0">
+                <children>
+                  <Button fx:id="recommend" maxWidth="250.0" minWidth="250.0" mnemonicParsing="false" onAction="#submit" prefWidth="250.0" text="Recommend a Tutor" VBox.margin="$x1" />
+                </children>
+              </VBox>
+              <Label layoutX="13.0" layoutY="14.0" prefHeight="38.0" prefWidth="473.0" text="Professors currently can only recommend a tutor." wrapText="true" />
+            </children>
+          </AnchorPane>
+        </content>
+      </Tab>
+      <Tab fx:id="administrator" text="Administrator">
+        <content>
+          <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <children>
+              <VBox layoutX="120.0" layoutY="58.0" prefHeight="147.0" prefWidth="261.0">
+                <children>
+                  <Button fx:id="sum1" maxWidth="250.0" minWidth="250.0" mnemonicParsing="false" onAction="#submit" prefWidth="250.0" text="View Summary 1" VBox.margin="$x1" />
+                  <Button fx:id="sum2" maxWidth="250.0" minWidth="250.0" mnemonicParsing="false" onAction="#submit" prefWidth="250.0" text="View Summary 2" VBox.margin="$x1" />
+                </children>
+              </VBox>
+              <Label layoutX="13.0" layoutY="14.0" prefHeight="38.0" prefWidth="473.0" text="Administrators can see summaries of statistics concerning tutors. This includes number of students who used tutors and average tutor ratings." wrapText="true" />
+            </children>
+          </AnchorPane>
+        </content>
+      </Tab>
+    </tabs>
+  </TabPane>
 </GridPane>

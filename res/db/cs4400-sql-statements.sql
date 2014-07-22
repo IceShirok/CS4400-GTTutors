@@ -22,25 +22,21 @@ SELECT * FROM Administrator WHERE GTID='555555555';
 /* ===== SEARCH & SCHEDULE SCREEN ===== */
 
 /* Get courses which has available tutors */
-SELECT DISTINCT T.School, T.Number
-    FROM TimeSlotComplete T LEFT OUTER JOIN Hires H
-	ON T.School=H.School AND T.Number=H.Number
-	AND T.Time=H.Time AND T.Semester=H.Semester AND T.Weekday=H.Weekday
-	WHERE H.GTID IS NULL AND T.Semester="Summer";
+SELECT DISTINCT School, Number
+    FROM AvailableTimeSlots NATURAL JOIN Tutors
+    WHERE Semester="Summer";
 
 /* Find available tutors */
-SELECT T.Name, T.Email, T.AvgProf, T.NumProf, T.AvgProf, T.NumProf
-    FROM TutorRatings T NATURAL JOIN AvailableTimeSlots
-    WHERE Semester="Summer"
-        AND School="CS"
-        AND Number="4400"
-        AND Weekday IN ("Thursday","Friday")
-        AND Time IN ("12PM","1PM")
-    GROUP BY T.GTID
+SELECT T.Name, T.Email, T.AvgProf, T.NumProf, T.AvgProf, T.NumProf, A.Weekday, A.Time
+    FROM TutorRatings T NATURAL JOIN AvailableTimeSlots A
+        NATURAL JOIN Tutors
+    WHERE Semester="Summer" AND School="CS" AND Number="4400"
+        AND Weekday IN ("Monday","Wednesday","Friday")
+        AND Time IN ("1PM","10AM")
     ORDER BY T.AvgStudent ASC, T.GTID ASC;
 
 /* Schedule a tutor */
-INSERT INTO Hires VALUES ("700000000","CS","4400","1PM","Summer","Friday");
+INSERT INTO Hires VALUES ("700000000","CS","1332","10AM","Summer","Monday");
 
 
 /* ===== RATES SCREEN ===== */
@@ -61,16 +57,34 @@ INSERT INTO Recommends VALUES ("900000003", "700000000", "This student was the b
 
 
 /* ===== SUM1 SCREEN ===== */
+select H.School, H.Number, H.Semester,
+        count(DISTINCT H.GTID) as SGTID, count(DISTINCT S.GTID) as TGTID
+    from Hires H left outer join TimeSlot S
+    on S.Time=H.Time and S.Weekday=H.Weekday and S.Semester=H.Semester
+    where H.Semester IN ("Fall","Spring")
+    group by H.School, H.Number, H.Semester
+    order by H.School ASC
 
 
 /* ===== SUM2 SCREEN ===== */
+select R.School, R.Number, R.Semester,
+        count(T.GTA) as nonTA, avg(R.Rating) as avgRating
+    from Rates R left outer join Tutors T
+    on T.GTID=R.TGTID and T.School=R.School and T.Number=R.Number
+    where T.GTA=0 and semester in("Fall","Spring")
+    group by R.School, R.Number, R.Semester
+    order by R.School ASC
+
+select R.School, R.Number, R.Semester,
+        count(T.GTA) as TA, avg(R.Rating) as avgRating
+    from Rates R left outer join Tutors T
+    on T.GTID=R.TGTID and T.School=R.School and T.Number=R.Number
+    where T.GTA=1 and semester in("Fall","Spring")
+    group by R.School, R.Number, R.Semester
+    order by R.School ASC
 
 
 /* ===== VIEWS ===== */
-CREATE VIEW TutorComplete AS (
-    SELECT * FROM User NATURAL JOIN Student NATURAL JOIN Tutor
-);
-
 CREATE VIEW TutorScheduleInfo AS (
 	SELECT T.GTID AS TGTID,
 	H.GTID AS UGTID, S.Email, S.Name,
@@ -81,15 +95,18 @@ CREATE VIEW TutorScheduleInfo AS (
 	INNER JOIN Student S ON H.GTID=S.GTID
 );
 
-CREATE VIEW TimeSlotComplete AS (
-    SELECT * FROM TutorComplete TC NATURAL JOIN TimeSlot TS NATURAL JOIN Tutors T
+CREATE VIEW TutorComplete AS (
+    SELECT * FROM User NATURAL JOIN Student NATURAL JOIN Tutor
+);
+
+CREATE OR REPLACE VIEW TimeSlotComplete AS (
+    SELECT * FROM TutorComplete TC NATURAL JOIN TimeSlot TS
 );
 
 CREATE VIEW AvailableTimeSlots AS (
-	SELECT DISTINCT T.GTID, T.Name, T.Email, T.School, T.Number, T.Time, T.Semester, T.Weekday
+	SELECT DISTINCT T.GTID, T.Name, T.Email, T.Time, T.Semester, T.Weekday
 		FROM TimeSlotComplete T LEFT OUTER JOIN Hires H
-		ON T.School=H.School AND T.Number=H.Number
-		AND T.Time=H.Time AND T.Semester=H.Semester AND T.Weekday=H.Weekday
+		ON T.Time=H.Time AND T.Semester=H.Semester AND T.Weekday=H.Weekday
 		WHERE H.GTID IS NULL
 );
 

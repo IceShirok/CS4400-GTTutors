@@ -13,7 +13,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -21,9 +20,6 @@ import edu.gatech.GTTutors.main.GTTutorsLaunch;
 import edu.gatech.GTTutors.model.Sum1POJO;
 
 public class SummaryOneController extends AbstractController {
-
-    @FXML
-    private Label message;
     
     @FXML
     private CheckBox fall;
@@ -56,13 +52,8 @@ public class SummaryOneController extends AbstractController {
         if(summer.isSelected()) {
             semestersSet.add("\"Summer\"");
         }
-        
-        if(semestersSet.isEmpty()) {
-            message.setText("Didn't select a semester!");
-        } else {
-            String semesters = processInClause(semestersSet);
-            populateResults(semesters);
-        }
+        String semesters = processInClause(semestersSet);
+        populateResults(semesters);
     }
 
     @Override

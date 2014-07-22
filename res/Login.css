@@ -3,8 +3,8 @@ root {
 }
 
 .root {
-    -fx-background-color: #002b45;
-    -fx-text-fill: #ffffff;
+    -fx-background-color: #ffffff/*#002b45*/;
+    -fx-text-fill: #000000;
 }
 
 .text {
@@ -15,7 +15,7 @@ root {
 .label {
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #000000;
 }
 
 .button {
@@ -30,16 +30,16 @@ root {
 #welcome-text {
    -fx-font-size: 32px;
    -fx-font-family: "Arial Black";
-   -fx-fill: #ffffff;
+   -fx-fill: #000000;
 }
 
 #title {
-  -fx-fill: #ffffff;
+  -fx-fill: #000000;
   -fx-font-weight: bold;
   -fx-font-size: 24px;
 }
 
 #message {
-  -fx-fill: PINK;
+  -fx-fill: #FF0000;
   -fx-font-weight: bold;
 }

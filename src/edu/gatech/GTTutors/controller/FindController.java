@@ -9,18 +9,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import edu.gatech.GTTutors.main.GTTutorsLaunch;
 import edu.gatech.GTTutors.model.FindPOJO;
 
 public class FindController extends AbstractController {
     
     @FXML
-    private Label message;
+    private Text message;
     
     @FXML
     private TextField gtid;
@@ -45,6 +45,7 @@ public class FindController extends AbstractController {
             message.setText("You can only see your own schedule.");
             return;
         } else {
+            message.setText("");
             populateResults();
         }
     }

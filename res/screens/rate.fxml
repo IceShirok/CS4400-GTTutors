@@ -87,5 +87,5 @@
   </GridPane>
   <Label text="Note: You may only rate tutor that have tutored for you." GridPane.columnIndex="0" GridPane.rowIndex="2" />
   <Separator prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-  <Label fx:id="message" text="" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+  <Text fx:id="message" text="" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 </GridPane>

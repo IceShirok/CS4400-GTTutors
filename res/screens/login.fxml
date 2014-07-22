@@ -50,5 +50,5 @@
   </GridPane>
   <Text id="welcome-text" text="Georgia Tech Tutors" GridPane.columnIndex="0" GridPane.rowIndex="0" />
   <Label text="By: Susanna Dong and Tyler Pennington" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-  <Label fx:id="message" text="" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+  <Text fx:id="message" text="" GridPane.columnIndex="0" GridPane.rowIndex="2" />
 </GridPane>

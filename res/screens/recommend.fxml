@@ -69,5 +69,5 @@
       <RadioButton fx:id="rate4" mnemonicParsing="false" text="4 (Do Not Recommend)" toggleGroup="$ratings" />
     </children>
   </VBox>
-  <Label fx:id="message" text="" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+  <Text fx:id="message" text="" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 </GridPane>

@@ -13,17 +13,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import edu.gatech.GTTutors.main.GTTutorsLaunch;
 import edu.gatech.GTTutors.model.SearchPOJO;
 
 public class SearchController extends AbstractController {
     
     @FXML
-    private Label message;
+    private Text message;
     
     @FXML
     private ChoiceBox<String> courses;
@@ -155,6 +155,7 @@ public class SearchController extends AbstractController {
     @Override
     protected void submit(ActionEvent event) {
         if(courses.getValue() == null) {
+            message.setText("Please fill out all entries.");
             return;
         }
         String[] courseSplit = courses.getValue().split(" ");
@@ -192,7 +193,13 @@ public class SearchController extends AbstractController {
                 timesSet.add(parseTime(box.getId().substring(1)));
             }
         }
+
+        if(daysSet.isEmpty()) {
+            message.setText("Please fill out all entries.");
+            return;
+        }
         
+        message.setText("");
         String days = processInClause(daysSet);
         String times = processInClause(timesSet);
         
@@ -214,7 +221,7 @@ public class SearchController extends AbstractController {
                     GTTutorsLaunch.PW);
             Statement stmt = connect.createStatement();
             
-            String strSelect = "SELECT DISTINCT School, Number FROM AvailableTimeSlots"
+            String strSelect = "SELECT DISTINCT School, Number FROM AvailableTimeSlots NATURAL JOIN Tutors"
                     + " WHERE Semester=\"" + GTTutorsLaunch.log.getCurrentSemester() + "\";";
             System.out.println(strSelect);
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -254,7 +261,7 @@ public class SearchController extends AbstractController {
             Statement stmt = connect.createStatement();
             
             String strSelect = "SELECT T.Name, T.Email, T.AvgProf, T.NumProf, T.AvgProf, T.NumProf, A.Weekday, A.Time"
-                + " FROM TutorRatings T NATURAL JOIN AvailableTimeSlots A"
+                + " FROM TutorRatings T NATURAL JOIN AvailableTimeSlots A NATURAL JOIN Tutors"
                 + " WHERE Semester=\"" + GTTutorsLaunch.log.getCurrentSemester() + "\""
                     + " AND School=\"" + school + "\""
                     + " AND Number=\"" + number + "\""

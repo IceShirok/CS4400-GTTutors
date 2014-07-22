@@ -6,17 +6,17 @@ import java.sql.Statement;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.text.Text;
 import edu.gatech.GTTutors.main.GTTutorsLaunch;
 
 public class RecommendController extends AbstractController {
     
     @FXML
-    private Label message;
+    private Text message;
     
     @FXML
     private TextField studentGtid;
@@ -34,6 +34,7 @@ public class RecommendController extends AbstractController {
                 || tutorGtid.length() == 0 || desc.length() == 0) {
             message.setText("Please fill out all entries.");
         } else {
+            message.setText("");
             int rating = Integer.parseInt(selected.getId().substring(4));
             submitRecommendForm(tutorGtid, desc, rating);
         }

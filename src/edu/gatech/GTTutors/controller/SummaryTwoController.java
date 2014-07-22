@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,9 +19,6 @@ import edu.gatech.GTTutors.main.GTTutorsLaunch;
 import edu.gatech.GTTutors.model.Sum2POJO;
 
 public class SummaryTwoController extends AbstractController {
-    
-    @FXML
-    private Label message;
     
     @FXML
     private CheckBox fall;
@@ -160,7 +156,7 @@ public class SummaryTwoController extends AbstractController {
                     connect.close();
                 }
             } catch (Exception e) {
-                message.setText(e.getMessage() + " Please contact the database admin for help.");
+                //message.setText(e.getMessage() + " Please contact the database admin for help.");
             }
         }
         

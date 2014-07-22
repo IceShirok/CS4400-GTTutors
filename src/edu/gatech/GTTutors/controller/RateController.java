@@ -10,17 +10,17 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.text.Text;
 import edu.gatech.GTTutors.main.GTTutorsLaunch;
 
 public class RateController extends AbstractController {
     
     @FXML
-    private Label message;
+    private Text message;
 
     @FXML
     private ChoiceBox<String> courses;
@@ -33,7 +33,6 @@ public class RateController extends AbstractController {
 
     @Override
     protected void submit(ActionEvent event) {
-        // TODO: implement submission into DB
         String tutorName = name.getText();
         String course = courses.getValue();
         String desc = description.getText();
@@ -42,7 +41,7 @@ public class RateController extends AbstractController {
                 || tutorName.length() == 0 || desc.length() == 0) {
             message.setText("Please fill out all of the form.");
         } else {
-            // TODO: parse school and number
+            message.setText("");
             String[] courseSplit = course.split(" ");
             int rating = Integer.parseInt(selected.getId().substring(4));
             submitRatesForm(tutorName, courseSplit[0], courseSplit[1], GTTutorsLaunch.log.getCurrentSemester(), desc, rating);

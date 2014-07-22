@@ -4,10 +4,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import edu.gatech.GTTutors.main.GTTutorsLaunch;
 
 public class MenuController extends AbstractController {
+    
+    @FXML
+    private TabPane menu;
+    @FXML
+    private Tab professor;
+    @FXML
+    private Tab administrator;
+    @FXML
+    private Tab student;
 
     @FXML
     private Button search;
@@ -26,24 +36,6 @@ public class MenuController extends AbstractController {
     private Button sum1;
     @FXML
     private Button sum2;
-    
-    
-    @FXML
-    private GridPane student;
-    @FXML
-    private GridPane tutorstudent;
-    @FXML
-    private GridPane professor;
-    @FXML
-    private GridPane administrator;
-    
-    @FXML
-    private GridPane[] rows;
-    
-    @FXML
-    protected void initialize() {
-        rows = new GridPane[]{tutorstudent, student, professor, administrator};
-    }
 
     @FXML
     private Label loginInfo;
@@ -68,8 +60,20 @@ public class MenuController extends AbstractController {
     protected void populate(ActionEvent event) {
         setLoginDisplay(GTTutorsLaunch.log.getUsername());
         
-        for(GridPane row : rows) {
-            row.setVisible((row.getId().toLowerCase()).contains(GTTutorsLaunch.log.getUserType().toLowerCase()));
+        professor.setDisable(true);
+        administrator.setDisable(true);
+        student.setDisable(true);
+        
+        String user = GTTutorsLaunch.log.getUserType();
+        if(user.equals("Administrator")) {
+            administrator.setDisable(false);
+            menu.getSelectionModel().select(administrator);
+        } else if(user.equals("Professor")) {
+            professor.setDisable(false);
+            menu.getSelectionModel().select(professor);
+        } else {
+            student.setDisable(false);
+            menu.getSelectionModel().select(student);
         }
     }
 
