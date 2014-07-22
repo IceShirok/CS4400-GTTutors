@@ -17,7 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import edu.gatech.GTTutors.main.DatabaseController;
+import edu.gatech.GTTutors.main.GTTutorsLaunch;
 import edu.gatech.GTTutors.model.Sum1POJO;
 
 public class SummaryOneController extends AbstractController {
@@ -92,9 +92,9 @@ public class SummaryOneController extends AbstractController {
         Connection connect = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connect = (Connection) DriverManager.getConnection(DatabaseController.DB_URL + DatabaseController.GROUP,
-                                                                DatabaseController.GROUP,
-                                                                DatabaseController.PW);
+            connect = (Connection) DriverManager.getConnection(GTTutorsLaunch.DB_URL + GTTutorsLaunch.GROUP,
+                                                                GTTutorsLaunch.GROUP,
+                                                                GTTutorsLaunch.PW);
             Statement stmt = connect.createStatement();
             ResultSet rset = stmt.executeQuery(query);
             

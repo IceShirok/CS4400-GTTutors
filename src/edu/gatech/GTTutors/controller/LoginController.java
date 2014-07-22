@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import edu.gatech.GTTutors.main.DatabaseController;
 import edu.gatech.GTTutors.main.GTTutorsLaunch;
 
 public class LoginController extends AbstractController {
@@ -40,9 +39,9 @@ public class LoginController extends AbstractController {
         Connection connect = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connect = (Connection) DriverManager.getConnection(DatabaseController.DB_URL + DatabaseController.GROUP,
-                                                                DatabaseController.GROUP,
-                                                                DatabaseController.PW);
+            connect = (Connection) DriverManager.getConnection(GTTutorsLaunch.DB_URL + GTTutorsLaunch.GROUP,
+                                                                GTTutorsLaunch.GROUP,
+                                                                GTTutorsLaunch.PW);
             Statement stmt = connect.createStatement();
             
             String strSelect = "SELECT * FROM User WHERE GTID='" + username + "' AND Password='" + password + "';";
@@ -50,7 +49,7 @@ public class LoginController extends AbstractController {
             ResultSet rset = stmt.executeQuery(strSelect);
             
             if (rset.next()) {                
-                for(String type : DatabaseController.USER_TYPES) {
+                for(String type : GTTutorsLaunch.USER_TYPES) {
                     strSelect = "SELECT * FROM " + type + " WHERE GTID='" + username + "';";
                     System.out.println(strSelect);
                     rset = stmt.executeQuery(strSelect);

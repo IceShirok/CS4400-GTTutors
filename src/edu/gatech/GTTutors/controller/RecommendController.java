@@ -11,7 +11,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import edu.gatech.GTTutors.main.DatabaseController;
 import edu.gatech.GTTutors.main.GTTutorsLaunch;
 
 public class RecommendController extends AbstractController {
@@ -54,9 +53,9 @@ public class RecommendController extends AbstractController {
         Connection connect = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connect = (Connection) DriverManager.getConnection(DatabaseController.DB_URL + DatabaseController.GROUP,
-                                                                DatabaseController.GROUP,
-                                                                DatabaseController.PW);
+            connect = (Connection) DriverManager.getConnection(GTTutorsLaunch.DB_URL + GTTutorsLaunch.GROUP,
+                                                                GTTutorsLaunch.GROUP,
+                                                                GTTutorsLaunch.PW);
             Statement stmt = connect.createStatement();
             
             String strSelect = "INSERT INTO Recommends VALUES(\""+ GTTutorsLaunch.log.getUsername() + "\", \""

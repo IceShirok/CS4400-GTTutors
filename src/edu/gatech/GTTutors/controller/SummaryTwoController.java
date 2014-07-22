@@ -16,8 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import edu.gatech.GTTutors.main.DatabaseController;
-import edu.gatech.GTTutors.model.Sum1POJO;
+import edu.gatech.GTTutors.main.GTTutorsLaunch;
 import edu.gatech.GTTutors.model.Sum2POJO;
 
 public class SummaryTwoController extends AbstractController {
@@ -52,13 +51,13 @@ public class SummaryTwoController extends AbstractController {
     protected void submit(ActionEvent event) {
         Set<String> semestersSet = new LinkedHashSet<>();
         if(fall.isSelected()) {
-            semestersSet.add("Fall");
+            semestersSet.add("\"Fall\"");
         }
         if(spring.isSelected()) {
-            semestersSet.add("Spring");
+            semestersSet.add("\"Spring\"");
         }
         if(summer.isSelected()) {
-            semestersSet.add("Summer");
+            semestersSet.add("\"Summer\"");
         }
         String semesters = processInClause(semestersSet);
         populateResults(semesters);
@@ -86,22 +85,26 @@ public class SummaryTwoController extends AbstractController {
         String query1 = "select R.School, R.Number, R.Semester, count(T.GTA) as nonTA, avg(R.Rating) as avgRating" +
         				" from Rates R left outer join Tutors T on T.GTID=R.TGTID and T.School=R.School and T.Number=R.Number" +
         				" where T.GTA=0" +
+        				" and semester in" + semesters +
         				" group by R.School, R.Number, R.Semester" +
         				" order by R.School ASC";
         String query2 = "select R.School, R.Number, R.Semester, count(T.GTA) as TA, avg(R.Rating) as avgRating" +
 						" from Rates R left outer join Tutors T on T.GTID=R.TGTID and T.School=R.School and T.Number=R.Number" +
 						" where T.GTA=1" +
+                        " and semester in" + semesters +
 						" group by R.School, R.Number, R.Semester" +
 						" order by R.School ASC";
 
         Connection connect = null;
         try {
         	Class.forName("com.mysql.jdbc.Driver");
-            connect = (Connection) DriverManager.getConnection(DatabaseController.DB_URL + DatabaseController.GROUP,
-                                                                DatabaseController.GROUP,
-                                                                DatabaseController.PW);            
+            connect = (Connection) DriverManager.getConnection(GTTutorsLaunch.DB_URL + GTTutorsLaunch.GROUP,
+                                                                GTTutorsLaunch.GROUP,
+                                                                GTTutorsLaunch.PW);            
             Statement stmt1 = connect.createStatement();
             Statement stmt2 = connect.createStatement();
+            System.out.println(query1);
+            System.out.println(query2);
             ResultSet rset1 = stmt1.executeQuery(query1);
             ResultSet rset2 = stmt2.executeQuery(query2);
             

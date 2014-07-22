@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import edu.gatech.GTTutors.main.DatabaseController;
-import edu.gatech.GTTutors.main.GTTutorsLaunch;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,6 +15,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import edu.gatech.GTTutors.main.GTTutorsLaunch;
 
 public class RateController extends AbstractController {
     
@@ -60,9 +59,9 @@ public class RateController extends AbstractController {
         Connection connect = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connect = (Connection) DriverManager.getConnection(DatabaseController.DB_URL + DatabaseController.GROUP,
-                                                                DatabaseController.GROUP,
-                                                                DatabaseController.PW);
+            connect = (Connection) DriverManager.getConnection(GTTutorsLaunch.DB_URL + GTTutorsLaunch.GROUP,
+                                                                GTTutorsLaunch.GROUP,
+                                                                GTTutorsLaunch.PW);
             Statement stmt = connect.createStatement();
             
             String strSelect = "SELECT School, Number FROM Hires"
@@ -94,9 +93,9 @@ public class RateController extends AbstractController {
         Connection connect = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connect = (Connection) DriverManager.getConnection(DatabaseController.DB_URL + DatabaseController.GROUP,
-                                                                DatabaseController.GROUP,
-                                                                DatabaseController.PW);
+            connect = (Connection) DriverManager.getConnection(GTTutorsLaunch.DB_URL + GTTutorsLaunch.GROUP,
+                                                                GTTutorsLaunch.GROUP,
+                                                                GTTutorsLaunch.PW);
             Statement stmt = connect.createStatement();
             
             // TODO: check if tutor is valid with student (probably need a view for this)

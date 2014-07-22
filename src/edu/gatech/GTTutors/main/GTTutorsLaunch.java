@@ -11,18 +11,19 @@ public class GTTutorsLaunch extends Application {
     
     public final static int WIDTH = 600;
     public final static int HEIGHT = 500;
+
+    public static final String DB_URL = "jdbc:mysql://academic-mysql.cc.gatech.edu/";
+    public static final String GROUP = "cs4400_Group_30";
+    public static final String PW = "ArdHSY4u";
+    public static final String[] USER_TYPES = {"Student", "Tutor", "Professor", "Administrator"};
     
     public final static String SCREEN_URL = "/screens/";
     public final static String FXML_EXT = ".fxml";
-    public DatabaseController db;
-    public static LoginStore log;
+    public static LoginStore log = new LoginStore();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         String foo = SCREEN_URL+"login"+FXML_EXT;
-        
-        db = new DatabaseController();
-        log = new LoginStore();
         
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(foo));
         Parent root = (Parent) fxmlLoader.load();

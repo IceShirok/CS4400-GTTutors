@@ -14,7 +14,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import edu.gatech.GTTutors.main.DatabaseController;
 import edu.gatech.GTTutors.main.GTTutorsLaunch;
 import edu.gatech.GTTutors.model.FindPOJO;
 
@@ -71,9 +70,9 @@ public class FindController extends AbstractController {
         Connection connect = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connect = (Connection) DriverManager.getConnection(DatabaseController.DB_URL + DatabaseController.GROUP,
-                                                                DatabaseController.GROUP,
-                                                                DatabaseController.PW);
+            connect = (Connection) DriverManager.getConnection(GTTutorsLaunch.DB_URL + GTTutorsLaunch.GROUP,
+                                                                GTTutorsLaunch.GROUP,
+                                                                GTTutorsLaunch.PW);
             Statement stmt = connect.createStatement();
 
             String strSelect = "SELECT Weekday, Time, Name, Email, School, Number"
