@@ -101,6 +101,13 @@ public class RateController extends AbstractController {
             String strSelect = "SELECT GTID from Tutor WHERE Name=\"" + tutorName + "\";";
             // need to look up tutor gtid
             String tutorGtid = tutorName;
+            ResultSet rset = stmt.executeQuery(strSelect);
+            
+            if(!rset.next()) {
+                message.setText("You've never had this tutor before!");
+                return;
+            }
+            message.setText("");
             
             strSelect = "INSERT INTO Rates VALUES(\""+ GTTutorsLaunch.log.getUsername() + "\", \""
                                                                 + tutorGtid + "\", \""

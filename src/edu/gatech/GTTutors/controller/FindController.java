@@ -82,7 +82,6 @@ public class FindController extends AbstractController {
             System.out.println(strSelect);
             
             ResultSet rset = stmt.executeQuery(strSelect);
-            // TODO: store the db info into the table
             
             ObservableList<FindPOJO> tableData = FXCollections.observableArrayList();
             while(rset.next()) {

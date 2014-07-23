@@ -40,6 +40,11 @@ INSERT INTO Hires VALUES ("700000000","CS","1332","10AM","Summer","Monday");
 
 
 /* ===== RATES SCREEN ===== */
+SELECT DISTINCT School, Number FROM Hires
+    WHERE GTID="700000000" AND Semester="Summer";
+
+SELECT GTID from Tutor WHERE Name="bob 16";
+
 INSERT INTO Rates VALUES ("700000007", "700000016", "CS", "1332", "Fall", "This tutor was the best tutor I've ever had.", 1);
 
 
